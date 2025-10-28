@@ -13,7 +13,6 @@
   <img src="https://img.shields.io/github/stars/HashimThePassionate/computer-networking?style=social" />
 </p>
 
----
 
 ## 📘 About the Project
 
