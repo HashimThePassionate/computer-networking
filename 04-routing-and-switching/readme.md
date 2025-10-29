@@ -43,3 +43,79 @@ Using **dynamic routing protocols** helps routers calculate the best path from a
 Each algorithm within a dynamic routing protocol uses one or more of these factors to determine and install the best path to a destination within the **routing table** of a router.
 
 Each router has a **local routing table** that contains a list of destination routes or paths. This table simply tells the router how to forward a packet to its destination.
+
+# ➡️ **Packet Forwarding Example**
+
+The following diagram shows a computer that wants to send a message to a remote device.
+
+<div align="center">
+  <img src="./images/01.png" width="600"/>
+
+  Figure 9.1 – Network diagram
+</div>
+
+As shown in the preceding diagram, **PC 1** wants to send a message to **Router-B**, which has been configured with an IP address of `10.10.10.1`.
+
+Before PC 1 places the message on the network media, it checks its **local routing table**. This is to determine whether the destination exists within the same network as PC 1 (the `192.168.1.0/24` network) or on a remote network.
+
+
+## 💻 Step 1: PC 1 Checks its Routing Table
+
+The following screenshot shows the routing table within PC 1.
+
+<div align="center">
+  <img src="./images/02.png" width="600"/>
+
+  Figure 9.2 – PC 1 routing table
+</div>
+
+Since the destination `10.10.10.1` **does not exist** within its local `192.168.1.0/24` network, PC 1 sends the message to its **default gateway**. In this case, the default gateway is **Router-A** on the network.
+
+
+## 🛰️ Step 2: Router-A Checks its Routing Table
+
+When Router-A receives the message from PC 1, it inspects the **destination IP address** (`10.10.10.1`) within the Layer 3 header of the packet. It then checks its local routing table for a suitable route or path to forward the packet to its destination.
+
+The following screenshot shows the routing table of Router-A.
+
+<div align="center">
+  <img src="./images/03.png" width="600"/>
+
+Figure 9.3 – Routing table of a Cisco router
+</div>
+
+As shown in the preceding screenshot, the routing table contains a list of destination routes (paths) that are known to the router.
+
+### Understanding the Routing Table
+
+  * **Codes**: The code listed in the upper portion of the snippet indicates *how* a route was learned by the router.
+  * **Routes**: In the lower portion of the snippet, there are various parent routes and child routes.
+  * **Parent/Child Routes**: The child routes can be easily identified as they are indented compared to the parent routes (which are not indented).
+  * **Route Codes (`C` and `L`)**: Each child route has a code that indicates how the route was learned.
+      * **C**: This code indicates the route is **directly connected** to the router.
+      * **L**: This code indicates it’s a **local route** that points to a specific IP address on the router itself.
+  * **Route Information**: Each route contains a destination network followed by either the **exit interface** of the router or the **next hop address**.
+
+> #### 📝 Important Note: Routing Logic
+>
+>   * A router will check its routing table using a **top-down approach** until it finds a suitable route.
+>   * Once a suitable route is found, the router **stops searching** and forwards the packet to the destination based on the details specified within that route.
+>   * A network route will specify the **exit interface** and/or the **next hop address**.
+>       * **Exit Interface**: This simply indicates which port on the router should be used to forward the packet to its destination.
+>       * **Next Hop Address**: This is the IP address of the next router to receive the packet along the way to the destination.
+
+
+## 🏁 Step 3: Forwarding the Packet
+
+Therefore, Router-A uses the following network route to forward the packet to Router-B:
+
+```
+C 10.10.10.0/30 is directly connected, GigabitEthernet0/0
+```
+
+Simply put, Router-A will forward the packet out from its **GigabitEthernet 0/0** interface, to which Router-B is connected.
+
+
+## 🛑 Exception: No Route Found
+
+However, if a default gateway or router does not have a valid route to a destination network, it will return a **Destination Unreachable** message to the sender.
