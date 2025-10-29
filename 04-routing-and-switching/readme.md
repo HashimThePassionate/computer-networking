@@ -119,3 +119,75 @@ Simply put, Router-A will forward the packet out from its **GigabitEthernet 0/0*
 ## 🛑 Exception: No Route Found
 
 However, if a default gateway or router does not have a valid route to a destination network, it will return a **Destination Unreachable** message to the sender.
+
+# 🗺️ **Understanding Routing Protocols**
+
+Routers can populate their routing tables with **directly connected routes**. These are networks that are physically attached to the local interfaces of the router.
+
+However, a router is unable to determine the path or route to a destination network that is **not** directly connected. This includes remote networks on the internet or networks attached to other routers within an organization.
+
+For instance, the following screenshot shows the routing table of Router-A, which has two directly connected routes/networks on the local router.
+
+<div align="center">
+  <img src="./images/04.png" width="600"/>
+
+  Figure 9.4 – Routing table
+</div>
+
+
+As shown in the preceding diagram, Router-A contains:
+
+  * The **10.10.10.0/30** network, which is directly connected to its `GigabitEthernet 0/0` interface.
+  * The **192.168.1.0/24** network, which is directly connected to the `GigabitEthernet 0/1` interface.
+
+The following diagram provides a visual representation of the routing table within Router-A.
+
+<div align="center">
+  <img src="./images/05.png" width="600"/>
+
+Figure 9.5 – Network topology
+</div>
+
+
+## 🚧 The Problem of Remote Networks
+
+However, what if the network topology were to expand to include additional networks that are interconnected with multiple routers? This can be seen in the following diagram.
+
+<div align="center">
+  <img src="./images/06.png" width="600"/>
+
+Figure 9.6 – Network diagram
+</div>
+
+As shown in the preceding diagram, **Router-A** is **not** directly connected to the `10.20.20.0/24` and `172.16.1.0/24` networks.
+
+Therefore, if **PC 1** wants to send a message to **PC 2** over the network, Router-A will **not be able to forward the message**. This is because those remote networks are not yet known to Router-A.
+
+As a result, if PC 1 forwards a packet to Router-A with the destination IP address of `172.16.1.10`, Router-A will return a **Destination Host Unreachable** message to PC 1. This happens because a route to the destination host or network does not exist within the routing table of Router-A.
+
+The following screenshot shows the routing table of Router-A on the new topology.
+
+<div align="center">
+  <img src="./images/07.png" width="600"/>
+
+Figure 9.7 – Router-A routing table
+</div>
+
+As shown in the preceding screenshot, Router-A **does not have a network route** for the `172.16.1.0/24` network. Because of this, it will not be able to forward any packets to **PC 2**, which has an IP address of `172.16.1.10`.
+
+The following screenshot shows the response from Router-A (PC 1's gateway), which indicates it does not have a valid route to the destination host.
+
+<div align="center">
+  <img src="./images/08.png" width="600"/>
+
+Figure 9.8 – Destination unreachable message from the router
+</div>
+
+
+## 💡 The Solution: Dynamic Routing Protocols
+
+A network professional can resolve this issue by configuring Router-A, Router-B, and Router-C with a **dynamic routing protocol**.
+
+This type of protocol **automatically shares network routes between routers**. This allows them to update their routing tables with any network topology changes and ensures each router knows how to forward packets to its intended destination.
+
+Many dynamic routing protocols are commonly implemented within organizations by network professionals. Each protocol has unique characteristics that define how they choose the most suitable path to a destination.
