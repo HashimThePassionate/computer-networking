@@ -476,3 +476,74 @@ As shown in the screenshot:
 > #### 💡 Tip
 >
 > If you are interested in seeing more BGP routing tables, check out the **BGP Looking Glass** project. This service is maintained by many ISPs around the world and allows limited, read-only access to their BGP routers. Simply type the Google search term `bgp looking glass` in your web browser.
+
+---
+
+# ➡️ **Static Routing**
+
+**Static routing** allows network professionals to **manually configure** destination network routes within the routing table of a router.
+
+Static routes always take precedence over any network route that was learned using a dynamic routing protocol. This is because static routes have a default **Administrative Distance (AD) of 1**, which is lower (and therefore more trustworthy) than the AD of any dynamic routing protocol. If you recall, the AD defines the trustworthiness of a route. Hence, if a network professional creates a static route to a destination network, the router will automatically trust this route over others.
+
+-----
+
+### ⚙️ Use Cases and Drawbacks
+
+Network professionals can configure static routes on all routers within a small network. However, static routing has significant limitations:
+
+  * **No Automatic Updates**: If the network topology changes, the static routes within the routers will **not automatically update** to reflect the changes. This is the primary difference compared to dynamic routing protocols.
+  * **Manual Maintenance**: Static routes require a network professional to always update the configurations manually on *all* routers of an organization.
+  * **Scalability**: Static routing is workable for small networks that change **infrequently** and where there are fewer IP networks.
+  * **Misconfiguration Risk**: If a network professional misconfigures a static route on a router, the router will not forward packets correctly to the intended destination network. As a result, these misconfigurations can affect the performance of a network.
+  * **"Black Hole" Routes**: A router will still forward packets to a network that is no longer reachable. This happens simply because the static route configured within the router tells the device how to forward packets and does not update the routing table if the network topology changes.
+  * **Complexity**: Removing or modifying a static route requires the skills of a network professional. As an organization’s network grows, network professionals will need to implement a static route for each destination network on each router. Additionally, the complexity of troubleshooting issues increases as the network topology gets larger.
+
+-----
+
+### 🗂️ Types of Static Routes
+
+The following are various types of static routes:
+
+  * **Standard static route**: This type of static route specifies how to reach a specific destination network.
+  * **Default static route**: A default static route is used when no other routes within the routing table of a router match the destination IP address of a packet. This type of route is usually configured to forward packets to the internet.
+  * **Floating static route**: This type of static route functions as a **backup route** to a primary route on a router. It is configured with an AD that is *higher* than the primary route, so it is only used if the primary route is no longer available.
+  * **Summary static route**: A summary static route is used to represent multiple destination IP networks in the form of a single, consolidated static route. Summary static routes are used to reduce the size of a routing table that has too many routes forwarding traffic to the same destination.
+
+-----
+
+### 🖥️ Static Routing Example
+
+The following diagram shows a simple network topology where each router has been configured with static routing to forward traffic to remote networks.
+
+<div align="center">
+  <img src="./images/22.png" width="600"/>
+
+  Figure 9.19 – Network topology
+</div>
+
+As shown in the preceding diagram, **Router-A** has to be configured with static routes to forward traffic to `10.20.20.0/30`, `172.16.1.0/24`, and the internet, as these networks are not directly connected to the router.
+
+The following screenshot shows the static routes within the routing table of Router-A that are used to forward packets to the `10.20.20.0/30` and `172.16.1.0/24` networks.
+
+<div align="center">
+  <img src="./images/23.png" width="600"/>
+
+
+  Figure 9.20 – Static routes
+</div>
+
+
+Lastly, the following screenshot highlights the **default static route**, which indicates the **gateway of last resort** on the routing table of Router-A.
+
+<div align="center">
+  <img src="./images/24.png" width="600"/>
+
+
+  Figure 9.21 – Default static route
+</div>
+
+As shown in the preceding screenshot, the default static route (indicated by `S*`) is used when no other routes within the routing table of a router have a match for the destination IP address within a packet. Additionally, the next-hop address (`10.10.10.1`) of a default static route is used as the **gateway of last resort** on the router.
+
+Having completed this section, you have learned about the fundamentals of static routing and dynamic routing.
+
+---
