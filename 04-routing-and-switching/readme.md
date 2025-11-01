@@ -1039,3 +1039,128 @@ Figure 9.41 – LLDP details
 Hence, in many organizations with mixed-vendor equipment, **LLDP is the preferred neighbor discovery protocol**. It helps both network professionals and networking devices identify the types of devices on their network.
 
 ---
+
+# 🖥️ **Exploring VLANs**
+
+In most networks, there are a lot of different traffic types:
+
+  * **Voice traffic** generated from VoIP phones
+  * **Video traffic** from surveillance systems and telepresence equipment
+  * **Data traffic** from end devices such as computers, servers, and printers
+
+Imagine that an organization wants to segment these traffic types by implementing separate and dedicated network equipment for each type. This would mean creating three **physically isolated networks** to keep each traffic type apart from the other. The disadvantage of performing this physical segmentation is the high cost of purchasing dedicated network equipment to build these networks.
+
+## Converged Networks and Logical Segmentation
+
+With the evolution of the networking industry, we can create a fully **converged network**. This allows all traffic types to use the same physical network while implementing **logical segmentation** of traffic using network switches. This allows for the creation of a single, well-designed physical network for voice, video, and data traffic, while still segmenting those traffic types within an organization. As an aspiring network professional, you’re probably wondering whether there will be any sort of interference between these traffic types over the same physical network.
+
+Network professionals implement a **Virtual Local Area Network (VLAN)** within their switches to segment physically connected components. This allows them to be logically organized.
+
+### 🌟 Benefits of Implementing VLANs
+
+There are many benefits to implementing VLANs, such as the following:
+
+  * Improving network performance and management
+  * Reducing the size of a broadcast domain
+  * Improving network security
+  * Reducing cost
+
+### broadcast Broadcast Domains
+
+VLANs are used to improve the performance of a network by **reducing the size of a broadcast domain**.
+
+Think of a VLAN as a logical network; devices within the same logical network can reach each other by using a broadcast. Since a broadcast is contained within a VLAN, devices that are assigned to another VLAN will not be affected.
+
+Simply put, if all the devices within the Human Resources (HR) department were assigned to **VLAN 10** and a computer within the HR department was generating a lot of broadcast messages, only devices within the HR department would be affected.
+
+The following diagram provides a visual representation of VLANs within a company.
+
+<div align="center">
+  <img src="./images/45.png" width="600"/>
+
+  Figure 9.42 – Network with VLANs
+</div>
+
+As shown in the preceding diagram, if PC 2 (HR VLAN 20) generates a lot of broadcast messages, only PC 5 and PC 8 will be affected, as they belong to the same VLAN as PC 2.
+
+### 🏷️ VLAN Tagging (IEEE 802.1Q)
+
+VLANs are created on network switches, and network professionals can assign a VLAN to an interface. Therefore, any device that sends a frame to a switch interface will be assigned an **IEEE 802.1Q tag**, which contains the **VLAN ID** of the interface. This technique ensures all frames are tagged with a VLAN ID, which helps the switch logically separate one piece of VLAN traffic from another.
+
+To understand how VLAN tagging is used within a switch, let’s take a look at the following diagram, which represents a single switch.
+
+<div align="center">
+  <img src="./images/46.png" width="600"/>
+
+Figure 9.43 – VLAN assignment to each interface
+</div>
+
+As shown in the preceding diagram:
+
+1.  Each computer is connected to an interface on the switch, and a VLAN ID is assigned to each port.
+2.  Therefore, if PC 1 sends a broadcast to the switch, all inbound traffic on the `Fa0/1` interface will be automatically **tagged with VLAN 10**.
+3.  Since the message from PC 1 is a broadcast, the switch will forward the message to **all other ports that are assigned to the same VLAN**.
+4.  Therefore, the broadcast message will be sent from both the `Fa0/3` and `Fa0/5` interfaces, and PC 3 and PC 5 will receive the message from PC 1.
+5.  Overall, devices that are located on another VLAN, such as VLAN 20, are not affected by the broadcast from PC 1. Each VLAN is logically isolated from the other VLANs within the switch.
+
+### 🌐 VLANs and IP Subnetting
+
+Since each VLAN is logically isolated from the other, each VLAN must be assigned a **unique IP subnet**, as shown in the following diagram.
+
+<div align="center">
+  <img src="./images/47.png" width="600"/>
+
+  Figure 9.44 – VLAN segmentation
+</div>
+
+However, to ensure intercommunication between VLANs, network professionals will need to implement a **Layer 3** device or a dedicated **router** that has been configured to perform **inter-VLAN routing**. This is a technique that allows devices from one VLAN to communicate with devices on another VLAN.
+
+### 🔗 Access Ports vs. Trunk Links
+
+  * **Access Ports**: An access port allows only **one** statically assigned VLAN on the interface.
+  * **Trunk Links**: These are point-to-point connections from switch-to-switch or switch-to-router. Trunks allow **multiple VLANs** to carry their traffic between switches and routers at the same time.
+
+### 📂 Types of VLANs
+
+Various types of VLANs are created on a network. The following are the common types of VLANs within organizations:
+
+  * **Default VLAN**: This is the VLAN created by the vendor. The default VLAN is **VLAN 1**, and all interfaces of the switch are assigned to VLAN 1 by default, so a new enterprise-grade switch will work out of the box. However, it is not recommended to use the default VLAN for security reasons. Unfortunately, network professionals are unable to rename or delete the default VLAN.
+  * **Data VLAN**: This VLAN is configured to transport traffic generated by end devices such as computers, servers, printers, and access points.
+  * **Native VLAN**: This VLAN is used to transport **untagged traffic** on an IEEE 802.1Q trunk link. Whenever an end device (like a computer) sends traffic to a switch, the receiving switch port inserts an IEEE 802.1Q tag (this is **tagged traffic**). **Untagged traffic** does not originate from a VLAN; it is self-generated traffic from the switch itself, such as CDP and LLDP messages.
+  * **Management VLAN**: This VLAN is used to remotely access the switch over a network for management purposes. It is also referred to as a **Switch Virtual Interface (SVI)** and is configured with an IP address and subnet mask.
+  * **Voice VLAN**: Voice traffic uses UDP, which does not provide reliability for packet delivery. Since a converged network is recommended, having a dedicated VLAN to transport voice traffic is preferable to ensure it is kept separate from other traffic types.
+
+> #### 📝 Important Note
+>
+> Only **one data VLAN** can be assigned to a switch port; this type of assignment creates an **access port** on the switch. Two VLANs can be assigned to an access port, but only if the other is a **voice VLAN**. Therefore, only one data and one voice VLAN are allowed on a single access port.
+
+### Example of Access Port vs. Trunk
+
+The following diagram shows that VLAN 10 and 20 have been configured, but the connection between the two switches is an **access port** that has only been statically assigned to **VLAN 10**.
+
+<div align="center">
+  <img src="./images/48.png" width="600"/>
+
+  Figure 9.45 – Issues with access ports
+</div>
+
+As shown in the preceding diagram, PC 1 and PC 3 (VLAN 10) will be able to exchange messages. However, PC 2 and PC 4 (VLAN 20) **will not** be able to communicate with each other because their frames will be blocked.
+
+To solve this issue, a **trunk** is needed between the two switches to allow both VLAN 10 and 20 traffic, as shown here.
+
+<div align="center">
+  <img src="./images/49.png" width="600"/>
+
+  Figure 9.46 – Trunk links
+</div>
+
+### 🔑 Key Points: Port Tagging and IEEE 802.1Q
+
+  * When a source device (such as a computer) sends a frame into a switch port, the switch will insert an **IEEE 802.1Q tag** into the frame.
+  * **Access ports** allow network professionals to configure one data VLAN on an interface.
+  * The IEEE 802.1Q tag contains the **VLAN ID** that is assigned to the switch’s interface. This tag helps the switch isolate one piece of VLAN traffic from another, so each VLAN is logically separated.
+  * The IEEE 802.1Q tag is kept on the frame as long as it is passing **between switches** (on a trunk link).
+  * The IEEE 802.1Q tag is only **removed** when the switch is sending outbound traffic from an **access port** (to an end device).
+  * **Trunks** are special interfaces configured on a switch to transport multiple pieces of VLAN traffic between switches.
+
+---
