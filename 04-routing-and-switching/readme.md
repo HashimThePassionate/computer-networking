@@ -651,3 +651,48 @@ Having completed this section, you have gained an understanding of bandwidth man
 
 
 ---
+
+# 🔄 **Delving into Switching Concepts**
+
+As you have learned so far, network switches are designed and configured to forward frames to their destinations over a network. However, network switches have a lot of additional cool features that allow network professionals to enable special services and functions on a network.
+
+In this section, you will learn how network professionals can:
+* Distribute power over network cables to wireless access points and VoIP phones.
+* Prevent a Layer 2 loop on a switching network.
+* Aggregate multiple physical links into a single logical link between switches.
+* Discover connected devices on a network.
+
+## ⚡ Power over Ethernet (PoE)
+
+**Power over Ethernet (PoE)** is the technology that allows **Direct Current (DC)** power to be sent over a copper Ethernet cable to devices. This reduces the need for a dedicated power supply and a separate Alternating Current (AC) power outlet for each device.
+
+For instance, imagine you’re a network professional who has been assigned to install an access point in the center of a ceiling within a large office space.
+* Before installing the access point, you notice that the closest AC power outlet is located in the furthest corner of the room.
+* Additionally, attaching a power extension cord to the access point while running the power cord above the ceiling is perhaps not a good idea due to safety concerns.
+
+Enabling the PoE feature on a **PoE-supported switch** will allow DC power to be distributed along the Ethernet cable to the access point. This hence reduces the need for a dedicated power supply and AC power outlet. The same concepts are commonly implemented to provide power to **VoIP phones** and **IP cameras** within organizations.
+
+> #### 📝 Important Note
+>
+> Since an Ethernet cable is used to support both PoE and data, **PoE does not add any additional Ethernet capabilities** to the data that’s transported along the same cable.
+
+### Standards and Specifications
+
+PoE is defined by **IEEE 802.3af**, which was created in 2003. It specifies how electrical power can be delivered to another device by using:
+* The **spare pairs** within a copper Twisted Pair cable (pins 4 and 5 or pins 7 and 8).
+* The **data pairs** of an Ethernet cable (pins 1 and 2 or pins 3 and 6).
+
+The concept of using PoE within networks allows organizations to save a lot of money by reducing the need for AC outlets and dedicated power supplies for devices.
+
+* **PoE (IEEE 802.3af):** Provides up to **15.4 watts** of DC power with a maximum of **350 milliamps (mA)** of electrical current.
+* **PoE+ (IEEE 802.3at):** An improved variation of PoE defined in 2009. It provides an increased power rating of up to **25.5 watts** with a maximum of **600 mA** of electrical current to devices.
+
+> #### 📝 Important Note
+>
+> There are two modes of PoE:
+> * **Mode A:** Delivers power on the **data pairs** (1, 2, 3, and 6).
+> * **Mode B:** Delivers power on the **spare pairs** (4, 5, 7, and 8).
+
+Therefore, before a network professional purchases PoE switches for their organization, it’s important to check the power rating of their PoE-supported devices (such as access points, IP cameras, and VoIP phones). This is to determine which version of PoE is more efficient to distribute power to these devices – that is, **PoE** or **PoE+**.
+
+---
