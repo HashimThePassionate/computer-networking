@@ -547,3 +547,107 @@ As shown in the preceding screenshot, the default static route (indicated by `S*
 Having completed this section, you have learned about the fundamentals of static routing and dynamic routing.
 
 ---
+
+# 📊 **Managing Bandwidth**
+
+Within an organization’s network, many devices and users are sending and receiving messages to and from each other. Some users are uploading and downloading files from the internet, while others are having a teleconference meeting using a Voice over IP (VoIP) or Video over IP solution.
+
+Overall, many different traffic types are traveling along a network.
+
+  * Some of these traffic types use a connection-oriented protocol, such as **Transport Control Protocol (TCP)**.
+  * Others use a connectionless protocol, such as **User Datagram Protocol (UDP)**.
+
+## 🚦 TCP vs. UDP
+
+One of the major differences between TCP and UDP is that **TCP provides guaranteed delivery** for packets over a network.
+
+  * If a packet is not delivered to its intended destination, the sender will retransmit the message until the destination host provides an acknowledgment.
+  * Packets that use TCP as their preferred transport layer protocol have a higher priority on the network because TCP provides guaranteed delivery.
+  * Therefore, if a network becomes saturated or congested with too many packets, each device that wants to send a message tries to access the available bandwidth, which becomes an issue.
+
+## 📥 Device Buffers
+
+Furthermore, each networking device has two buffers for temporarily storing messages that are awaiting processing and forwarding. These are known as **port-based memory** and **shared memory**.
+
+  * **Port Buffer (Port-based memory):** This buffer exists on each interface of a networking device.
+      * It temporarily stores *inbound messages* that have to be processed by the device.
+      * It also temporarily stores *outbound messages* that have already been processed and are waiting to be placed on the physical network.
+  * **Shared Memory:** This is simply used to temporarily store all messages in a common buffer that is shared by all interfaces and the memory of the networking device.
+
+If a networking device's buffer is filled, any additional messages will be **dropped** from the network.
+
+  * If **TCP** messages are dropped, the sender will **retransmit** them to the destination.
+  * However, if **UDP** messages are dropped, the sender will **not retransmit** them. This is because UDP does not have any mechanism to determine whether a packet arrived at a destination or not.
+
+## 📞 The Problem with Time-Sensitive Traffic
+
+For instance, voice and video traffic types use **UDP** as their preferred transport layer protocol. This is because UDP provides better capabilities for delivering messages that are time-sensitive over a network compared to TCP.
+
+Imagine speaking to a colleague using a VoIP telephone within your office, and the dialog is not smooth.
+
+  * Some packets are being sent and received more slowly than others (this is **jitter**).
+  * Some packets are being dropped entirely.
+  * This is happening because another employee is transferring a huge file and saturating the network.
+
+## 💡 Solutions for Traffic Management
+
+Network professionals use two types of solutions to ensure specific traffic types (like voice and video) have a high priority of accessing the bandwidth over others on a network:
+
+1.  **Traffic Shaping**
+2.  **Quality of Service (QoS)**
+
+### 1\. Traffic Shaping
+
+Traffic shaping allows network professionals to **create delays for some traffic types** using a traffic profile.
+
+This technique is commonly used to improve latency and optimize the performance of a network, while also increasing the allocation of bandwidth for specific, important traffic types.
+
+Simply put, if a sender is transmitting too many packets that are congesting the network, networking devices (such as switches) can create a delay or slow down the amount of traffic between that host and its destination. This allows other, higher-priority traffic types to access the bandwidth and flow with optimal speed, while the lower-priority traffic is delayed.
+
+### 2\. Quality of Service (QoS)
+
+QoS is another solution commonly implemented within many organizations’ networks. It helps control traffic on a network while ensuring the improved performance of mission-critical applications over a limited network capacity.
+
+#### 📈 Key QoS Metrics
+
+The following metrics are used within QoS to measure types of traffic over a network:
+
+  * **Bandwidth:** The number of bits that can be transmitted in a second between a source and a destination.
+  * **Congestion:** In a network, congestion results in packets being delayed while they are arriving at their destinations. Congestion occurs when there is a lot more traffic on the network than the available bandwidth can handle.
+  * **Delay (Latency):** This measures the time a packet takes to travel between a source and a destination. Users on a congested network usually experience high latency (slow response time).
+  * **Jitter:** This measures the **variation in the delay times** of incoming packets on a network. For instance, on an optimal network, all packets received from the same sender should have the same latency. Jitter increases on the network as users send and receive messages, saturating the network.
+  * **Packet Loss:** This measures how many packets are discarded or dropped between a source and destination over a given time. Any discarded TCP messages are retransmitted, while UDP messages are not resent.
+
+#### ⚙️ The QoS Prioritization Process
+
+The following steps show how QoS prioritizes traffic on a network:
+
+1.  **Classification:** Inbound traffic on a networking device is inspected. It is then placed within a waiting queue based on the **Differentiated Services (DS) field** of an IPv4 packet or the **Traffic Class field** of an IPv6 packet.
+2.  **Marking:** This is the process where the QoS tools on the networking device modify one or more fields within the packet header to insert a priority value.
+3.  **Queuing:** This phase is responsible for managing all the queues for outgoing messages on a networking device. Traffic is sent out of a networking device based on its priority.
+4.  **Policing and Shaping:**
+      * The **policing** feature is responsible for *discarding* or *dropping* packets that exceed a configured rate.
+      * The **shaping** feature is responsible for *keeping* or *holding* the packets within a queue to delay them.
+5.  **Congestion Avoidance:** This feature is used to proactively reduce the amount of congestion that exists within a network to reduce packet loss (for example, by dropping some packets *before* the buffer is completely full).
+
+#### 🔬 The Classification Process in Detail
+
+The following diagram shows the classification process when using QoS.
+
+<div align="center">
+  <img src="./images/25.png" width="700"/>
+
+  Figure 9.22 – Classification process
+</div>
+
+As shown in the preceding diagram:
+
+1.  **Traffic enters the router's interface.** A single flow of data arrives at the device.
+2.  **A QoS tool is used to classify incoming traffic.** The router inspects the packet's header (e.g., the DS field) to identify what kind of traffic it is (e.g., voice, video, or file transfer).
+3.  **Traffic is placed into a waiting queue with a priority.** Based on its classification, the packet is sorted into a high-priority, medium-priority, or low-priority queue.
+4.  **Packets with a higher priority are transmitted before those with a lower priority.** The router's scheduler pulls packets from the high-priority queue first, ensuring that critical traffic (like VoIP) is sent out with the least amount of delay.
+
+Having completed this section, you have gained an understanding of bandwidth management techniques such as traffic shaping and QoS.
+
+
+---
