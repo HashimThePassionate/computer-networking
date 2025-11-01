@@ -910,3 +910,77 @@ Figure 9.35 – STP port labels
 </div>
 
 ---
+
+# 🔗 **Port Aggregation** (EtherChannel)
+
+**EtherChannel**, also known as **port aggregation**, is a technology that allows network professionals to **combine multiple physical links** into a **single logical connection** between switches. The primary purpose is to aggregate (or sum up) the bandwidth between these devices.
+
+### 🚧 The Problem: Redundancy vs. Aggregation
+
+If a network professional connects two network cables to the Gigabit Ethernet interfaces of two switches, their goal might be to double the bandwidth.
+
+However, **Spanning-Tree Protocol (STP)** will identify this as a redundant path. To prevent a Layer 2 loop, STP will **logically block one of the links**, leaving only one link active for transmitting messages.
+
+The following diagram illustrates this exact problem.
+
+<div align="center">
+  <img src="./images/39.png" width="600"/>
+
+
+  Figure 9.36 – STP blocking a redundant path
+</div>
+
+As shown in the diagram, the objective was to combine the bandwidth of both Gigabit Ethernet interfaces to create a sum of 2 Gigabits per second (Gbps) between SW1 and SW2. However, because this creates redundant links, STP blocks one of them, completely defeating the goal of aggregation.
+
+### 💡 The Solution: EtherChannel
+
+To solve this issue, you can use **EtherChannel**. This technology allows a network professional to successfully aggregate the bandwidth of two or more physical connections, creating a single logical link. This logical link supports much greater bandwidth between devices.
+
+Key benefits of using EtherChannel include:
+
+  * **Hardware Re-use**: The existing switch interfaces are used to create the EtherChannel link, so network professionals do not need to upgrade the hardware components of a switch that already supports the technology.
+  * **Load Balancing**: EtherChannels create load balancing of network traffic between the bundled links on a network.
+  * **Redundancy**: The technology also helps with traffic aggregation while providing redundancy (if one physical link in the bundle fails, traffic automatically redirects to the remaining links).
+
+### 🤝 LACP (Link Aggregation Control Protocol)
+
+The **Link Aggregation Control Protocol (LACP)** is an open-source protocol defined by **IEEE 802.3ad**. It allows switches from any vendor to form EtherChannels with each other.
+
+An LACP EtherChannel is formed when two switches use compatible modes on their interfaces. The **Active** LACP mode, for example, actively tries to negotiate an EtherChannel.
+
+The following table shows the results of different LACP mode combinations on SW1 and SW2.
+
+<div align="center">
+  <img src="./images/40.png" width="600"/>
+
+  Figure 9.37 – LACP modes
+</div>
+
+### 📋 Requirements for EtherChannel
+
+For an EtherChannel to be established successfully between switches, several requirements must be met on all participating interfaces:
+
+  * The same **type of interface** must be used (e.g., all GigabitEthernet).
+  * The same **number of interfaces** must be used in the bundle.
+  * The **speed and duplex** settings must be the same on all interfaces.
+  * The same **configurations** (such as allowed VLANs and Native VLAN) must be applied to all interfaces.
+
+The following diagram shows an example of an EtherChannel that is **unable to form**. This is because there is a **duplex mismatch** (SW1 is set to Half, SW2 is set to Full).
+
+<div align="center">
+  <img src="./images/41.png" width="600"/>
+
+  Figure 9.38 – Unable to form an EtherChannel
+</div>
+
+When the configurations are the same on all interfaces being used, the EtherChannel is established successfully.
+
+<div align="center">
+  <img src="./images/42.png" width="600"/>
+
+  Figure 9.39 – Establishing an EtherChannel
+</div>
+
+If one of the physical interfaces of an EtherChannel becomes unavailable or has any misconfigurations, the **entire EtherChannel is broken**. All the physical interfaces will then function independently from each other (which will likely cause STP to block one of them again).
+
+---
