@@ -1164,3 +1164,190 @@ To solve this issue, a **trunk** is needed between the two switches to allow bot
   * **Trunks** are special interfaces configured on a switch to transport multiple pieces of VLAN traffic between switches.
 
 ---
+
+# ⚙️ **Understanding Switch Port Configurations**
+
+Managed switches allow a network professional to configure many components of the device. This includes:
+
+  * Enabling and disabling each interface.
+  * Adjusting the support bandwidth on a port.
+  * Configuring the speed and duplex settings on each interface.
+
+These are just a few of the many changes network professionals can apply to any port on a switch.
+
+Unlike **managed switches**, **unmanaged switches** are different. Network professionals can’t log into the device or make any modifications to how the switch operates. An unmanaged switch simply operates like a basic switch and forwards frames to its destination – that’s about it.
+
+A managed switch provides the additional capabilities and features that are needed by network professionals within the industry to ensure messages are delivered efficiently and quickly to their destinations.
+
+In this section, you will explore the importance of various switch port/interface configurations and their effects on a network.
+
+-----
+
+## 🔄 Duplex and Speed
+
+**Duplex** simply defines how communication can occur between two devices on a point-to-point connection. Within networking devices, security appliances, and end devices, each of these devices has a network adapter that supports the following duplex modes:
+
+  * Half
+  * Full
+  * Auto
+
+### Half Duplex
+
+**Half duplex** allows only **one device to communicate at a time** on a point-to-point connection. This applies to two switches that are connected or a computer that is connected to a switch.
+
+Simply put, if two switches are connected and their connected interfaces are operating in half duplex, one switch can send frames while the other receives. If the sender stops transmitting, then the other device can transmit its messages.
+
+For instance, devices that are connected to a hub (such as computers) operating on half duplex can prevent packet collisions by using **Carrier Sense Multiple Access/Collision Detection (CSMA/CD)**.
+
+### Full Duplex
+
+A **full duplex** allows two devices to **simultaneously exchange messages** at any time over a point-to-point network connection.
+
+For instance, the following diagram shows two switches that are connected that can both exchange messages with each other at the same time, unlike half duplex.
+
+<div align="center">
+  <img src="./images/50.png" width="600"/>
+
+Figure 9.47 – Full duplex
+</div>
+
+
+
+### Auto Duplex
+
+However, the default duplex mode on many devices such as switches, routers, and computers is **auto duplex**. This enables the **automatic negotiation sensing feature**, which allows one device to sense the operating mode of another device and media, allowing the device to match the duplex mode.
+
+The following diagram shows two switches that have their interfaces configured in auto mode.
+
+<div align="center">
+  <img src="./images/51.png" width="600"/>
+
+
+Figure 9.48 – Auto mode
+</div>
+
+
+As shown in the preceding diagram, the interfaces on both switches are operating in auto duplex mode. Ideally, after a few seconds, both switches will automatically negotiate and operate in either a full or half duplex.
+
+By default, they should negotiate to operate in **full duplex**. But, if there are any issues with a cable (media), network adapter, or even the drivers on either device, the duplex mode can result in a **half duplex**.
+
+However, it’s recommended to **statically configure** the operating state of switch interfaces to ensure the best performances and reduce the time to troubleshoot an issue.
+
+> #### 📝 Important Note
+>
+> If there’s a **mismatch in the duplex** between two devices, high latency and packet loss can occur.
+
+-----
+
+### 🏎️ Speed
+
+**Speed** defines the maximum throughput or transmission speeds that are supported on an interface of a device. The following are various supported speed configurations on networking devices:
+
+  * **10**: Operates at 10 Mbps
+  * **100**: Operates at 100 Mbps
+  * **1,000**: Operates at 1,000 Mbps
+  * **Auto**: Uses an auto-negotiation sensing feature to detect and match the speed of another device
+
+It’s recommended to ensure devices that are connected on a point-to-point connection have the **same speed configurations** on their interfaces. However, keep in mind that the default operating mode for speed is **auto** on networking, security, and end devices.
+
+> #### 📝 Important Note
+>
+> If there’s a **mismatch in speed** between two devices, high latency and packet loss can occur.
+
+Having completed this section, you learned about the importance of ensuring both speed and duplex settings match on all devices within a network to prevent any issues.
+
+---
+
+# 🔍 **Port Mirroring**
+
+An important part of being a network professional is understanding how to capture network traffic from a switch. This allows you to perform packet analysis to determine potential network and security issues within an organization. Networking devices are designed to forward traffic between a source and destination as efficiently as possible. However, various issues can occur on a network over time, and analyzing packets can help identify the root cause of an issue.
+
+Managed switches allow network professionals to configure **port mirroring**, a feature that is built into many switches within the networking industry. When port mirroring is configured and enabled on a switch, the switch will create a copy of all the traffic. It will also remove both Layer 1 and Layer 2 pieces of data from each message before sending it out to a network security monitoring device.
+
+> #### 📝 Important Note
+>
+> Cisco commonly refers to port mirroring as **Switch Port Analyzer (SPAN)**, while 3Com uses the term **Roving Analysis Port (RAP)**.
+
+The following diagram shows a switch with port mirroring configured to mirror network traffic.
+
+<div align="center">
+  <img src="./images/52.png" width="600"/>
+
+Figure 9.49 – SPAN on a network switch
+</div>
+
+
+As shown in the preceding diagram, the switch is configured with port mirroring to create a copy of all network traffic that is passing through it. A copy is forwarded to the device with a network security monitoring tool, such as an **Intrusion Detection System (IDS)** or a protocol analyzer like **Wireshark**.
+
+### 🔑 Key Points of Port Mirroring
+
+The following are some key points of using the built-in port mirroring feature within supported switches:
+
+  * The port mirroring feature is already built into enterprise-grade networking switches.
+  * Port mirroring removes both Layer 1 and Layer 2 pieces of data from each message before sending it to the destination device.
+  * Network professionals need to apply the necessary configurations to create the mirror interfaces.
+  * **Remote SPAN (RSPAN)** can be configured on a larger network to capture traffic between switches that share a VLAN. This is the Cisco terminology for remote port mirroring.
+
+### 💻 Example SPAN Configuration
+
+The following is an example of SPAN configurations for a Cisco 2960 switch:
+
+```cisco
+Switch(config)# no monitor session 1
+Switch(config)# monitor session 1 source interface fastEthernet 0/1
+Switch(config)# monitor session 1 source interface fastEthernet 0/2
+Switch(config)# monitor session 1 destination interface fastEthernet 0/3
+```
+
+#### 📖 Code Explanation
+
+The preceding configuration enables monitoring on both the `FastEthernet 0/1` and `FastEthernet 0/2` interfaces and sends a copy of the traffic out of `FastEthernet 0/3` on the switch.
+
+1.  **`Switch(config)# no monitor session 1`**
+
+      * This command ensures any pre-existing configuration for monitoring session number 1 is deleted. This provides a clean setup.
+
+2.  **`Switch(config)# monitor session 1 source interface fastEthernet 0/1`**
+
+      * This command defines a *source* for the monitoring session. It tells the switch to copy all traffic from the `FastEthernet 0/1` interface and associate it with session 1.
+
+3.  **`Switch(config)# monitor session 1 source interface fastEthernet 0/2`**
+
+      * This command adds *another* source interface to the same session. The switch will now copy traffic from *both* `FastEthernet 0/1` and `FastEthernet 0/2`.
+
+4.  **`Switch(config)# monitor session 1 destination interface fastEthernet 0/3`**
+
+      * This command defines the *destination* for all the copied traffic. All traffic gathered from the source interfaces (`Fa0/1` and `Fa0/2`) will be sent out of the `FastEthernet 0/3` interface, where the monitoring device is connected.
+
+Having completed this section, you have learned the fundamentals of port mirroring. Next, you will learn about port security features and how they can be used to prevent unauthorized devices from accessing the network.
+
+# 🔒 Port Security
+
+Imagine if an employee connected their personal laptop or a wireless router to the network switch within your organization. What would happen? Network professionals are not only responsible for designing, building, and troubleshooting networks; they must also help protect the network from cyberattacks and threats.
+
+Enterprise-grade networking switches support a security feature known as **port security**. This feature applies security restrictions to the interfaces of a switch. Therefore, using port security on switches helps prevent unauthorized devices from accessing the network and its resources.
+
+The following are the capabilities of port security when applied to an interface on a switch:
+
+  * Filters inbound traffic based on the source **Media Access Control (MAC) address** of the sender device.
+  * Various security **violation modes** are used to either disable the interface automatically or restrict traffic from entering the interface.
+  * Allows a network professional to **statically assign** a permitted MAC address on an interface.
+  * Allows network professionals to **automatically learn** about and store trusted MAC addresses within the configurations of the switch (often called "sticky MAC").
+
+Keep in mind that port security is applied to an interface. If an attacker is connected to an active interface that is *not* configured with port security, the attacker will be able to access the network.
+
+Furthermore, port security filters inbound traffic based on the source MAC address of a trusted device. A seasoned hacker can easily **spoof** the MAC address of their device to an address that is trusted by the switch. This allows them to connect to the network while pretending to be a trusted device.
+
+
+# 🔄 Auto MDI-X
+
+The **Auto-Medium-Dependent Interface Crossover (Auto MDI-X)** feature is simply an auto-sensing mechanism. It is built into the firmware or operating systems of modern switches and allows the device to detect the type of cable being used to connect it to another device.
+
+For instance, before Auto MDI-X, network professionals needed to use specific cables:
+
+  * A **crossover cable** was required to interconnect the *same type* of device (e.g., switch to switch, router to router).
+  * A **straight-through cable** was used to interconnect *different types* of devices (e.g., switch to router, switch to PC).
+
+Nowadays, network professionals can use either a straight-through or a crossover cable to interconnect two switches without worrying if it’s the right type. The Auto MDI-X feature will simply detect the cable type and the devices. It then makes the necessary adjustments within the firmware or operating system to transmit and receive messages on the specific pins within the interface on the switch.
+
+---
