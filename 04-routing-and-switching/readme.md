@@ -984,3 +984,58 @@ When the configurations are the same on all interfaces being used, the EtherChan
 If one of the physical interfaces of an EtherChannel becomes unavailable or has any misconfigurations, the **entire EtherChannel is broken**. All the physical interfaces will then function independently from each other (which will likely cause STP to block one of them again).
 
 ---
+
+# 🤝 **Neighbor Discovery Protocol**
+
+As an aspiring network professional, it is nice to have an always up-to-date network topology diagram. Such diagrams help determine the type of networking devices, their capabilities, the interfaces used to connect to another device, their model numbers, and even their IP addresses.
+
+## 🔵 Cisco Discovery Protocol (CDP)
+
+The **Cisco Discovery Protocol (CDP)** is a **Cisco proprietary** protocol. It operates between Layers 2 and 3 of the OSI networking model.
+
+CDP is used to assist Cisco switches in learning about their **directly connected neighbors**, such as other switches and routers. On Cisco devices, CDP is enabled by default. It exchanges advertisement messages using a multicast address of `01:00:0C:CC:CC:CC`.
+
+A CDP message contains the following details about the sender device:
+
+  * Cisco IOS version of the switch or router
+  * Device model and type
+  * Connected interfaces for both local and remote devices
+  * The hostname of the device
+
+The following screenshot shows the devices that are connected to a Cisco switch that uses CDP.
+
+<div align="center">
+  <img src="./images/43.png" width="600"/>
+
+Figure 9.40 – CDP details
+</div>
+
+As shown in the preceding screenshot, the command output provides several columns of information:
+
+  * **Device ID**: Indicates the hostname of the directly connected device (e.g., `R1`, `SW1`, `SW2`).
+  * **Local Intrfc**: Identifies the interface on *this* switch (`SW3`) used by the connected device.
+  * **Holdtme**: Indicates how long (in seconds) the information will remain in the table before being discarded if no new advertisement is received.
+  * **Capability**: Indicates the type of device (e.g., `R` for Router, `S` for Switch).
+  * **Platform**: Indicates the hardware model of the device (e.g., `C2900`, `2960`).
+  * **Port ID**: Indicates the local interface on the *remote* device that is used to establish the connection.
+
+## 🌍 Link-Layer Discovery Protocol (LLDP)
+
+Since CDP is a Cisco proprietary protocol, it is **not interoperable** with non-Cisco devices on a network.
+
+However, the **Link-Layer Discovery Protocol (LLDP)** is another discovery protocol that operates over **Layer 2** of the OSI network model and is supported on **both Cisco and non-Cisco devices**.
+
+LLDP is defined by **IEEE 802.1AB**, which makes it interoperable on other vendor devices. It provides similar details as CDP on a network.
+
+The following screenshot shows the LLDP details on a Cisco switch.
+
+<div align="center">
+  <img src="./images/44.png" width="600"/>
+
+Figure 9.41 – LLDP details
+</div>
+
+
+Hence, in many organizations with mixed-vendor equipment, **LLDP is the preferred neighbor discovery protocol**. It helps both network professionals and networking devices identify the types of devices on their network.
+
+---
