@@ -695,4 +695,218 @@ The concept of using PoE within networks allows organizations to save a lot of m
 
 Therefore, before a network professional purchases PoE switches for their organization, it’s important to check the power rating of their PoE-supported devices (such as access points, IP cameras, and VoIP phones). This is to determine which version of PoE is more efficient to distribute power to these devices – that is, **PoE** or **PoE+**.
 
+# 🌳 **Spanning-Tree Protocol** (STP)
+
+When designing a network topology for any organization, it is essential to implement **redundancy** and **fault tolerance**. This ensures that multiple paths are available between a source and a destination.
+
+While redundancy seems to be good, it is also very bad for Layer 2 switched networks. When multiple switches are interconnected to create redundancy, the design also creates a **Layer 2 loop**. Simply put, a Layer 2 loop exists whenever there are two or more available paths between a sender and the destination host on a switched network.
+
+### 🏛️ The 3-Tier Architecture
+
+The following diagram shows the 3-tier architecture that is commonly implemented within large organizations.
+
+<div align="center">
+  <img src="./images/26.png" width="600"/>
+
+Figure 9.23 – 3-tier architecture model
+</div>
+
+As shown in the preceding diagram, this model allows for scalability and provides lots of redundancy between each layer:
+
+  * **Access Layer**: Allows end devices to connect and access resources on the network.
+  * **Distribution Layer**: Provides link aggregation, Quality of Service (QoS), and inter-VLAN routing.
+  * **Core Layer**: This is the high-speed backbone of the network that interconnects the distribution layer, often between remote branch offices.
+
+### ⚠️ The Problem: Layer 2 Loops
+
+Let’s take a look at how a Layer 2 loop is formed when there are redundant paths within a switched network. The following diagrams show a small network with a redundant path between PC 1 and PC 3.
+
+**Phase 1: Initial Frame**
+As shown in the diagram, PC 1 sends a frame to PC 3. It inserts the MAC address of PC 3 (`CC:CC:CC:CC:CC:CC`) into the destination MAC address field of the frame header.
+
+<div align="center">
+  <img src="./images/27.png" width="600"/>
+
+Figure 9.24 – Looping phase 1
+</div>
+
+**Phase 2: The Flood**
+When the frame arrives on SW1, the switch inspects the destination MAC address. Let's assume SW1 does not know where PC 3 is. It forwards a copy of the frame out the two available paths: one via SW2 and one via SW3.
+
+However, during this time, **PC 3 becomes unavailable** on the network. Because of this, SW3 no longer has the MAC address of PC 3 within its Content Addressable Memory (CAM) table.
+
+<div align="center">
+  <img src="./images/28.png" width="600"/>
+
+Figure 9.25 – Looping phase 2
+</div>
+
+**Phase 3: The Loop Begins**
+Since SW3 no longer has the MAC address of PC 3 in its CAM table, when SW3 receives the frame from SW1, it will **flood** the frame out of all other ports (except the one it arrived on). This means it sends the frame to SW2.
+
+The same thing occurs when SW3 receives the frame *from* SW2. It floods that frame back to SW1. This is the default behavior of switches when a destination MAC address is not found in their CAM table.
+
+<div align="center">
+  <img src="./images/29.png" width="600"/>
+
+Figure 9.26 – Looping phase 3
+</div>
+
+**Phase 4: The Broadcast Storm**
+This loop will occur on all switches within the topology as long as each switch does not know how to find the destination host. For this reason, each switch will simply regenerate the frame and rebroadcast it over and over.
+
+<div align="center">
+  <img src="./images/30.png" width="600"/>
+
+Figure 9.27 – Looping phase 4
+</div>
+
+
+The frames will loop in a never-ending cycle. This is because **Layer 2 frames do not contain a TTL (Time To Live) field** like Layer 3 packets do.
+
+  * Packets contain TTL fields that are assigned a value (number). Each hop (router) along the way decreases the TTL value by 1. This ensures packets do not live forever on a network if a routing loop occurs. If the TTL value reaches 0, the router discards the packet.
+  * Since frames do not have a TTL, they will not be automatically discarded. This creates a **broadcast storm** that can congest and crash an entire network.
+
+### ⚠️ The Second Problem: Duplicate Messages
+
+Another issue with redundant paths is the creation of duplicate messages between a source and a destination. To understand this, let's look at the following diagram, where PC 1 is sending a message to PC 3 (which is now connected).
+
+**Phase 1: Initial Frame**
+PC 1 sends a single frame to PC 3.
+
+<div align="center">
+  <img src="./images/31.png" width="600"/>
+
+Figure 9.28 – Duplication phase 1
+</div>
+
+**Phase 2: Duplicate Delivery**
+Without any loop prevention, when SW1 receives the frame, it will forward it to PC 3 using the two available paths (via SW2 and SW3). SW3 will then receive a copy from SW1 and another copy from SW2, and it will forward **both messages** to PC 3.
+
+<div align="center">
+  <img src="./images/32.png" width="600"/>
+
+Figure 9.29 – Duplication phase 2
+</div>
+
+**Phase 3: Duplicate Replies**
+Since PC 3 receives two copies of the message, it will **respond twice**. This duplication of responses will then multiply as it is sent back to PC 1, creating another storm.
+
+<div align="center">
+  <img src="./images/33.png" width="600"/>
+
+Figure 9.30 – Duplication phase 3
+</div>
+
+
+## 💡 The Solution: Spanning-Tree Protocol (STP)
+
+To resolve these issues, the **Spanning-Tree Protocol (STP)** was designed. STP is a **Layer 2 loop prevention protocol** that can detect any physical Layer 2 loops on a network and **logically block the redundant path**. This ensures only one active logical path between a source and destination is available at any time.
+
+> #### 📝 Important Note
+>
+> STP is defined by the **IEEE 802.1D** standard.
+
+The following diagram shows a network with STP enabled on all switches, which have already blocked a redundant path.
+
+<div align="center">
+  <img src="./images/34.png" width="600"/>
+
+Figure 9.31 – STP enabled on all switches
+</div>
+
+As shown, when PC 1 wants to send a message to PC 3, there is only one active logical path, which prevents a loop.
+
+However, if that primary path becomes unavailable, STP can detect the failure and automatically redirect the flow of traffic using one of the backup paths.
+
+<div align="center">
+  <img src="./images/35.png" width="600"/>
+
+Figure 9.32 – Detecting a network failure
+</div>
+As shown, STP can detect a failure on an active path and automatically unblock a redundant path to redirect traffic.
+
+### 📨 Bridge Protocol Data Units (BPDUs)
+
+Whenever a switch is powered on, it sends **Bridge Protocol Data Unit (BPDU)** frames every 2 seconds to its neighbor switches. A BPDU contains the switch’s **Bridge ID**, which is made of:
+
+  * Bridge Priority value
+  * Extended System ID (Ext-ID)
+  * MAC address
+
+<div align="center">
+  <img src="./images/36.png" width="600"/>
+
+Figure 9.33 – BPDU frame
+</div>
+
+### 👑 The Root Bridge Election
+
+The information in these BPDUs is used to elect a special switch as the **Root Bridge**.
+
+1.  The Root Bridge informs all other switches to create one logical, loop-free path. It becomes the central reference point for all traffic.
+2.  The switch with the **lowest bridge priority** gets elected as the Root Bridge.
+3.  All Cisco switches have a default bridge priority of **32768**.
+4.  If all switches have the same priority, the switch with the **lowest MAC address** will be elected as the Root Bridge.
+
+Network professionals commonly configure their core or distribution layer switches to become the Root Bridge by manually lowering the bridge priority (in decrements of 4096).
+
+Once the Root Bridge is elected, all other switches on the network create a logical path that points to the Root Bridge.
+
+### 🗺️ STP Port Role Example
+
+To get a better understanding of how STP identifies redundant paths, let’s look at the following network topology.
+
+<div align="center">
+  <img src="./images/37.png" width="600"/>
+
+Figure 9.34 – Spanning-Tree network topology
+</div>
+
+As shown, each switch has a priority value (Priority + Ext-ID value) and a unique MAC address.
+
+  * **SW1**: Priority 32769, MAC 000A.0011.1111
+  * **SW2**: Priority **24577**, MAC 000A.0033.3333
+  * **SW3**: Priority 32769, MAC 000A.0022.2222
+  * **SW4**: Priority 32769, MAC 000A.0044.4444
+
+#### Strategy for Identifying Port States
+
+Here is a strategy for identifying the root bridge and port states on a network:
+
+1.  **Identify the Root Bridge**: The central reference point for all traffic.
+2.  **Identify Root Ports**: Ports *closest* to the Root Bridge (but not on the Root Bridge).
+3.  **Identify Designated Ports**: Non-Root ports that are in a forwarding state.
+4.  **Identify Alternate/Blocking Ports**: Ports that are logically blocked by STP to prevent a loop.
+
+#### Step-by-Step Port Role Identification
+
+You must follow these steps to identify the root bridge and port status on the topology:
+
+1.  **Identify the Root Bridge**: **SW2** has the lowest priority value (**24577**), and therefore it becomes the **Root Bridge**.
+2.  **Identify Root Ports (Easiest Paths)**: Next, the root ports are those with the most direct, lowest-cost path to the Root Bridge.
+      * **SW1**'s port `Fa0/1` connects directly to the Root Bridge.
+      * **SW4**'s port `Fa0/4` connects directly to the Root Bridge.
+      * Therefore, **SW1 `Fa0/1`** and **SW4 `Fa0/4`** are **Root Ports (R)**.
+3.  **Identify SW3's Root Port**: We need to determine the port role on SW3. There are two paths from SW3 to the Root Bridge:
+      * Path 1: SW3 → SW1 → SW2
+      * Path 2: SW3 → SW4 → SW2
+      * Both paths have the same cost (interface bandwidth). We must observe the Bridge ID of the *next-hop* switch (SW1 vs. SW4). The path through the switch with the **lower Bridge ID** will be the preferred path.
+      * SW1's Bridge ID (MAC `...1111`) is lower than SW4's (MAC `...4444`).
+      * As a result, the path via SW1 is chosen, and **SW3 `Fa0/2`** becomes a **Root Port (R)**.
+4.  **Identify Designated Port on SW1**: Since the preferred path from SW3 to the Root Bridge is via SW1, the other side of that link, **SW1 `Fa0/2`**, becomes a **Designated Port (D)**.
+5.  **Identify Root Bridge Ports**: All ports on the Root Bridge are **Designated Ports (D)** by default. Therefore, SW2 `Fa0/1` and SW2 `Fa0/4` are Designated Ports.
+6.  **Identify the Blocking Port**: Finally, the ports between SW3 and SW4 are yet to be assigned. One will be a Designated Port, and the other will be an Alternate/Blocking Port.
+      * The switch with the **lower Bridge ID** will take precedence in having the Designated Port.
+      * SW3's Bridge ID (MAC `...2222`) is lower than SW4's (MAC `...4444`).
+      * Therefore, **SW3 `Fa0/3`** becomes a **Designated Port (D)**, and **SW4 `Fa0/3`** becomes the **Alternate/Blocking Port (A)**.
+
+The following diagram shows the final port labels on each switch within the topology.
+
+<div align="center">
+  <img src="./images/38.png" width="600"/>
+
+Figure 9.35 – STP port labels
+</div>
+
 ---
