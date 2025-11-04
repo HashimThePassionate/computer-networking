@@ -453,7 +453,7 @@ Open Shortest Path First (OSPF) is a **link-state** dynamic routing protocol. It
 The following network topology shows routers configured with OSPF.
 
 <div align="center">
-  <img src="./images/13.png" width="600"/>
+  <img src="./images/13.png" width="800"/>
 
 Figure 9.13 – OSPF network topology
 </div>
