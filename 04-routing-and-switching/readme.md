@@ -390,7 +390,7 @@ RIP is a **legacy, distance-vector** routing protocol. It is no longer implement
 The following diagram shows a network topology with routers configured using the RIP dynamic routing protocol.
 
 <div align="center">
-  <img src="./images/11.png" width="600"/>
+  <img src="./images/11.png" width="800"/>
 
 Figure 9.11 – Routers using the RIP dynamic routing protocol
 </div>
