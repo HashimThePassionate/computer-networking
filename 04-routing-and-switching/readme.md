@@ -604,7 +604,7 @@ The following are various types of static routes:
 The following diagram shows a simple network topology where each router has been configured with static routing to forward traffic to remote networks.
 
 <div align="center">
-  <img src="./images/22.png" width="600"/>
+  <img src="./images/22.png" width="800"/>
 
   Figure 9.19 – Network topology
 </div>
