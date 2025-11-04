@@ -499,7 +499,7 @@ EIGRP is a **hybrid, dynamic routing protocol**. It was a Cisco proprietary prot
 The following network topology shows routers configured with EIGRP.
 
 <div align="center">
-  <img src="./images/15.png" width="600"/>
+  <img src="./images/15.png" width="800"/>
 
 Figure 9.15 – EIGRP-enabled routers
 </div>
