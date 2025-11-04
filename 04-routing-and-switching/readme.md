@@ -242,7 +242,7 @@ Figure 9.5 – Network topology
 However, what if the network topology were to expand to include additional networks that are interconnected with multiple routers? This can be seen in the following diagram.
 
 <div align="center">
-  <img src="./images/06.png" width="600"/>
+  <img src="./images/06.png" width="800"/>
 
 Figure 9.6 – Network diagram
 </div>
