@@ -174,3 +174,86 @@ A seasoned hacker or cybersecurity professional can capture these probes to dete
 However, many newer devices are now allowing IT professionals to prevent the client from automatically connecting to a saved wireless network that is within range.
 
 ---
+
+# 📡 **Frequencies, Ranges, and Channels**
+
+The **Institute of Electrical and Electronics Engineers (IEEE)** is the governing body that creates and currently maintains the standards and frameworks for both electrical and electronics specifications. This includes computers and wireless networking.
+
+The **802 committee** of the IEEE holds the responsibility of creating and maintaining many common standards that are used by both computing and networking devices, such as Ethernet, Bluetooth, and Wi-Fi.
+
+The **.11 working group** of the 802 committee is specifically responsible for the wireless networking standard, known as the **IEEE 802.11 wireless networking standard**, within the industry.
+
+
+### 📜 IEEE 802.11 Wireless Standards
+
+The following table shows the different IEEE 802.11 wireless standards.
+
+<div align="center">
+  <img src="./images/06.png" width="600"/>
+
+  Figure 10.6 – Wireless standards
+</div>
+
+As shown in the preceding table, there are many generations of IEEE 802.11 within the wireless networking industry.
+
+  * **Original IEEE 802.11 (1997):** This was designed to operate on a 2.4 GHz frequency and supported a maximum data transfer rate of 2 Megabits per second (Mbps). However, this original standard was not implemented on any device.
+  * **IEEE 802.11b (1999):** This became the first official wireless standard that was implemented on devices. It operated on 2.4 GHz and provided a maximum data transfer rate of 11 Mbps.
+  * **IEEE 802.11a (1999):** This standard operates on the 5 GHz frequency and provides a maximum data transfer rate of 54 Mbps.
+  * **IEEE 802.11g (2003):** This standard operates at 2.4 GHz and supports maximum transfer rates of 54 Mbps.
+  * **IEEE 802.11n (Wi-Fi 4, 2009):** Also known as Wi-Fi 4, this standard operates on *both* the 2.4 GHz and 5 GHz frequencies. It supports **Multiple In Multiple Out (MIMO)**, which improves the maximum data transfer rate up to 300 Mbps.
+  * **IEEE 802.11ac (Wi-Fi 5, 2013):** This standard operates on the 5 GHz frequency and provides a maximum data transfer rate of 1 Gigabit per second (Gbps).
+  * **IEEE 802.11ax (Wi-Fi 6, 2019):** This is the latest version, which uses both 2.4 GHz and 5 GHz frequencies and provides a maximum data transfer rate of 9.6 Gbps.
+
+Overall, the speed and bandwidth that are supported on wireless networks are aligning with the speeds on wired networks, allowing users to exchange messages very quickly.
+
+
+### 📶 The 2.4 GHz Band
+
+The IEEE 802.11 standards use the **2.4 GHz** range, which has a total of 14 channels. These channels range from 2.400 GHz to 2.490 GHz, with each individual channel having a width of 20 MHz to 22 MHz for transporting messages.
+
+Since these individual channels are very close to each other, it is recommended to configure wireless routers and access points with **non-overlapping channels**, such as channels **1, 6, and 11**.
+
+The following diagram shows a representation of the non-overlapping channels.
+
+<div align="center">
+  <img src="./images/07.png" width="600"/>
+
+  Figure 10.7 – Non-overlapping channels
+</div>
+
+It is important to ensure your organization’s access points are not using any channels that are overlapping with other access points within the vicinity. This will create **interference** and affect the performance of the wireless network.
+
+However, the earlier generations of IEEE 802.11 primarily use the 2.4 GHz range. As a result, many organizations and home users who already have an existing wireless network are using the 2.4 GHz range. Therefore, if you were to implement a new wireless router or access point, there is a high possibility that another access point within the same vicinity is using an overlapping channel. This issue is due to the limited number of available channels in the 2.4 GHz range.
+
+> **💡 Tip**
+>
+> Using a **Wi-Fi analyzer tool**, such as **inSSIDer** from Metageek or the **Wi-Fi Analyzer** app from the Microsoft Store, allows network professionals to:
+>
+>   * View all nearby wireless networks.
+>   * See their operating frequencies and channels, SSIDs, vendors, and much more.
+>   * Determine whether your wireless network is using an overlapping channel with another nearby Access Point.
+
+
+### 🚀 The 5 GHz Band
+
+The **5 GHz** range supports a lot more channels compared to the 2.4 GHz band, with channels ranging from **36 to 165**.
+
+Unlike the 2.4 GHz band, the 5 GHz band allows devices to use channels of 20 MHz, 40 MHz, 80 MHz, and 160 MHz by using a technology known as **channel bonding**. Using channel bonding in the 5 GHz band allows wireless devices to transport more data over the wireless network, hence the 5 GHz band supports more bandwidth compared to the 2.4 GHz band.
+
+
+### ⚖️ Wireless Band Comparison
+
+The following table shows a comparison between the 2.4 GHz and 5 GHz bands.
+
+<div align="center">
+  <img src="./images/08.png" width="600"/>
+
+  Figure 10.8 – Wireless band comparison
+</div>
+
+As shown in the preceding table:
+
+  * The **2.4 GHz band** provides **better signal strength**, allowing the radio frequency signal to travel further away from the wireless router or access point, resulting in **better range**.
+  * The **5 GHz band**, on the other hand, operates on a higher frequency and **does not provide the same signal strength or range**. However, the 5 GHz band supports more channels and channel bonding to provide **greater bandwidth** and **less interference**.
+
+---
