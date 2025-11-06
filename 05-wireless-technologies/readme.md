@@ -257,3 +257,67 @@ As shown in the preceding table:
   * The **5 GHz band**, on the other hand, operates on a higher frequency and **does not provide the same signal strength or range**. However, the 5 GHz band supports more channels and channel bonding to provide **greater bandwidth** and **less interference**.
 
 ---
+
+# 📡 **SSID and Wireless Topologies**
+
+The **Service Set Identifier (SSID)** allows network professionals to create a network name that is 32-bits in length. This name helps users easily identify their preferred wireless network.
+
+When implementing a wireless network infrastructure within a building, office space, or home, it is important to understand the characteristics of the various types of wireless network infrastructure deployments.
+
+The topology of a wireless network can be in **infrastructure**, **ad hoc**, or **mesh** modes.
+
+  * **Infrastructure Mode**: A wireless Access Point (AP) is used as the network intermediary device. It allows wireless clients to connect and share resources.
+  * **Ad Hoc Mode**: This mode does not use any wireless intermediary devices. Instead, a wireless device (like a laptop) can directly connect to another laptop to share resources.
+  * **Mesh Mode**: All wireless devices establish a connection with each other, hence creating a mesh topology.
+
+### 🏠 Basic Service Set (BSS)
+
+A **Basic Service Set (BSS)** is the most common type of wireless infrastructure. It contains a **single** wireless router or access point, allowing wireless clients within the vicinity to connect to it.
+
+The wireless router or access point is simply the intermediary wireless networking device. It is used to forward WLAN frames between wireless clients and onto the wired network, which is known as a **Distributed System Service (DSS)**.
+
+The following diagram shows a typical wireless network that is configured as a BSS:
+
+<div align="center">
+  <img src="./images/09.png" width="600"/>
+
+Figure 10.9 – BSS wireless infrastructure
+</div>
+
+> #### 📝 Important Note
+>
+> Any wireless network that uses a wireless router or access point as the wireless network intermediary device is commonly referred to as **infrastructure mode**.
+
+### 🏢 Extended Service Set (ESS)
+
+The **Extended Service Set (ESS)** is commonly found within medium-sized to large organizations. It features **multiple access points** connected to the same DSS (wired network).
+
+This wireless network exists when network professionals implement two or more access points that are connected to the same wired network. Each access point is configured with the **same SSID**. This allows a user with a laptop to **roam** between different access points within the office space or building.
+
+Roaming allows a user to automatically connect to another access point with the same SSID when moving out of range from one access point (that has a weaker signal) and closer to another (that is broadcasting a stronger signal) with the same SSID.
+
+The following diagram shows a typical ESS wireless infrastructure:
+
+<div align="center">
+  <img src="./images/10.png" width="600"/>
+
+Figure 10.10 – ESS wireless infrastructure
+</div>
+
+As shown in the preceding diagram, there are two access points that are configured with the same SSID. This allows wireless clients to automatically connect to the access point with the better signal. When a wireless client is disconnecting from one access point and connecting to another, the user will experience a temporary drop in wireless network connectivity until the wireless client re-establishes an association with the new access point.
+
+### 💻 Independent Basic Service Set (IBSS)
+
+An **Independent Basic Service Set (IBSS)** is a wireless network that does **not** use a wireless router or access point. In an IBSS, each wireless client is connected to every other wireless client within the vicinity, creating a wireless mesh network. This type of wireless network allows clients to share their resources directly with another client and is commonly referred to as **ad hoc mode**.
+
+The following diagram shows a typical IBSS wireless network:
+
+<div align="center">
+  <img src="./images/11.png" width="600"/>
+
+Figure 10.11 – IBSS wireless network
+</div>
+
+As shown in the preceding diagram, each wireless client, such as a laptop, can be configured to operate as an access point. This allows other wireless clients to connect and share resources with each other without the need for a dedicated wireless router.
+
+---
