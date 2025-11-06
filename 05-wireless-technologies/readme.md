@@ -90,3 +90,87 @@ Unlike wireless routers, access points typically do not have any routing or swit
 Clients that are connected to access points receive an IP address that is provided to the clients on the wired network (e.g., from a central DHCP server). Hence, access points are simply used to allow wireless clients to access the organization’s network seamlessly, as if they were connected to the wired network.
 
 ---
+
+# 📡 **Beacons, Probes, Stations, and SSIDs**
+
+## 🏷️ Service Set Identifier (SSID)
+
+The **Service Set Identifier (SSID)** is simply the name of your wireless network. It is what allows wireless clients (like your phone or laptop) to identify one wireless network from another.
+
+Imagine if setting an SSID was not an option on your wireless router or access point; it would be quite challenging for users to find and identify their specific wireless network from their neighbor's.
+
+Home users and organizations usually change the default SSID (which is configured by the vendor) to a name that is recognizable.
+
+### 🔒 Security and Naming
+
+As a good security practice, organizations should **not** set an SSID that can easily identify the organization or attract (lure) a hacker.
+
+For instance, many IT professionals might configure their wireless networks with easily identifiable SSIDs, such as using their company’s name. While this concept provides a lot of convenience for employees, it also helps a hacker easily identify a target wireless network.
+
+## 📢 Beacons
+
+When a wireless router or access point is powered on, its firmware and configurations are loaded into memory. The device then begins to broadcast its presence within the vicinity.
+
+Wireless routers and access points continuously broadcast **beacons**. These are small packets of information that contain specific details about the wireless network, such as:
+
+  * The SSID (the network name)
+  * The wireless encryption standard (e.g., WPA2, WPA3)
+  * The operating channel
+  * The device's Media Access Control (MAC) address
+
+These beacons are detected and inspected by any device that has a supported wireless network adapter (such as smartphones, tablets, Internet of Things (IoT) devices, and laptops). This process is what allows a user to see a list of available wireless networks.
+
+The following diagram shows a wireless router broadcasting beacons.
+
+<div align="center">
+  <img src="./images/04.png" width="600"/>
+
+  Figure 10.4 – Wireless beacons
+</div>
+
+As shown in the preceding diagram, as wireless clients move into the range of the wireless signal, they will be able to capture these beacons and inspect them to determine which wireless network is close by.
+
+### "Hiding" Your Wireless Network
+
+Wireless routers and access points provide the capability of **disabling the SSID broadcast**. This is often used as a technique for "hiding" your wireless network from other wireless clients.
+
+However, this technique **does not add any real layer of security**. A seasoned hacker or cybersecurity professional can discover a "hidden" wireless network within a few seconds. They can do this by performing wireless reconnaissance, which involves capturing beacons and probes.
+
+If an IT professional chooses to disable the SSID broadcast feature, the wireless router will *still* broadcast beacons, but it will not insert the SSID. All other information will still be included.
+
+By analyzing the data within these captured beacons and probes, a seasoned hacker can determine:
+
+  * The type of clients and wireless routers within the area.
+  * The hidden wireless networks.
+  * The type of security configurations applied to the networks.
+  * Even the approximate distance between the attacker’s machine and the target wireless router and clients.
+
+The following snippet shows the basic configuration page of a wireless router where this setting can be changed.
+
+<div align="center">
+  <img src="./images/05.png" width="600"/>
+
+  Figure 10.5 – Wireless router basic configuration page
+</div>
+
+As shown in the preceding snippet, the basic wireless configuration page allows a user to configure the wireless operating standard (`Network Mode`), the SSID (`Network Name`), `Channel Width`, `Channel`, and whether to **enable or disable the SSID broadcast** on the device.
+
+## 💻 Stations and Probes
+
+When a wireless client (also known as a **station**) establishes a connection to a wireless router or access point, this is referred to as an **association**.
+
+> #### 📝 Important Note
+>
+> Wireless clients, such as laptops, smart TVs, and IoT devices, are all examples of **stations** on a wireless network. The terms "wireless clients" and "stations" are used interchangeably during discussions and literature.
+
+When a client joins a wireless network, it saves both the SSID and password into a **Preferred Network List (PNL)**. This list allows the user to easily re-join the same wireless network in the future.
+
+This PNL feature enables the wireless network adapter on a client to begin sending **probes** (or probe requests) for each entry within its PNL. The probes allow the client to "seek" or ask for any of the wireless networks (via their SSIDs) that are stored in its PNL. Once a wireless network is found within the signal range, the client will attempt to create an association with that network.
+
+### ⚠️ Security Risks of Probes
+
+A seasoned hacker or cybersecurity professional can capture these probes to determine all the wireless networks that are stored on a client's device. They can then attempt to perform an "AP-less" attack to retrieve the password/passphrase of an organization’s wireless network.
+
+However, many newer devices are now allowing IT professionals to prevent the client from automatically connecting to a saved wireless network that is within range.
+
+---
