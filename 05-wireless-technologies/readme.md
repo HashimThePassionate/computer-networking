@@ -425,3 +425,123 @@ The following diagram shows a representation of MU-MIMO on a wireless network:
 As shown in the preceding diagram, the access point is distributing multiple data streams to each wireless client at the same time.
 
 ---
+
+# 🔐 **Delving into Wireless Security**
+
+As an aspiring network professional, it is essential to gain a solid understanding of wireless security. This section covers the concepts and techniques used to improve the security posture of a wireless network within organizations.
+
+Wireless security helps network professionals prevent unauthorized users from accessing resources. It also prevents threat actors, such as hackers, from capturing sensitive data that is exchanged between devices on the wireless network.
+
+As more organizations implement wireless networks to support mobile workforces (using laptops and tablets), hackers are always looking for the "low-hanging fruit." These are the weakest points that can be easily compromised. Wireless networks are a common target because they can be attacked as long as the hacker is within the vicinity of the wireless signal emitting from an access point.
+
+Hence, network professionals must implement proper security solutions and best practices. This reduces the risk of a potential cyber-attack on their systems and network.
+
+
+## 🛡️ Wireless Encryption Standards
+
+### Wired Equivalent Privacy (WEP)
+
+**Wired Equivalent Privacy (WEP)** was one of the first generations of wireless security standards, implemented on IEEE 802.11b wireless networks. The WEP standard used the **Rivest Cipher 4 (RC4)** encryption algorithm to ensure confidentiality. However, many unresolved security vulnerabilities were found within RC4, allowing threat actors to easily compromise WEP-secured networks.
+
+> #### Key Points of WEP
+>
+>   * It uses a weak encryption algorithm (RC4).
+>   * It uses a small **Initialization Vector (IV)** that is static and does not change. This increases the likelihood of a threat actor determining the IV value.
+>   * It uses 64-bit and 128-bit key sizes during the data encryption process.
+>   * It uses the RC4 stream cipher for data encryption.
+>   * It provides a 24-bit Cyclic Redundancy Checksum (CRC) for integrity checking.
+
+### Wi-Fi Protected Access (WPA)
+
+The **Wi-Fi Protected Access (WPA)** wireless security standard became the successor to WEP. WPA used a 128-bit key to perform data encryption on each frame by using the **RC4** algorithm combined with the **Temporal Key Integrity Protocol (TKIP)**.
+
+TKIP ensures each WLAN frame is encrypted with a unique key before transmission. It inserts a sequence counter within each frame, which prevents a threat actor from performing a replay attack.
+
+While WPA is using RC4 with TKIP, there are security vulnerabilities within both algorithms that allow hackers to easily compromise WPA wireless networks. Additionally, WPA provides a 48-bit CRC with a Message Integrity Check (MIC) for integrity checking for each WLAN frame.
+
+> #### Key Points of WPA
+>
+>   * It uses a weak encryption algorithm (RC4).
+>   * It uses **TKIP** to encrypt each frame with a unique key.
+>   * It uses 128-bit keys during the data encryption process.
+>   * It provides a 48-bit CRC for data integrity.
+
+### Wi-Fi Protected Access 2 (WPA2)
+
+**Wi-Fi Protected Access 2 (WPA2)** is the successor to WPA. WPA2 uses the **Counter Mode with Cipher Block Chaining Message Authentication Code Protocol (CCMP)**, which is implemented within the **Advanced Encryption Standard (AES)** data encryption algorithm.
+
+CCMP allows AES to encrypt data within 128-bit blocks with a 128-bit key size. AES with CCMP is much stronger and prevents hackers from decrypting messages exchanged over WPA2 wireless networks.
+
+### Wi-Fi Protected Access 3 (WPA3)
+
+**Wi-Fi Protected Access 3 (WPA3)** is currently the strongest and latest wireless security standard. It uses **Simultaneous Authentication of Equals (SAE)** for data encryption.
+
+When WPA3 is implemented on personal networks, it uses a 128-bit key; on enterprise networks, it uses a 192-bit key.
+
+Many new wireless routers and access points support WPA3. However, many wireless clients still only support up to WPA2. WPA3 supports backward compatibility for these clients, but the wireless router will **scale down** its security standard from WPA3 to WPA2 to support them. As a result, the network inherits all the security vulnerabilities of the older WPA2 standard, such as brute force attacks.
+
+
+## 🔑 Authentication Methods
+
+After configuring the wireless security standard, it is important to configure the authentication method. This defines how the wireless router or access point will validate an authorized client before allowing access to the network.
+
+### Pre-Shared Key (PSK)
+
+**Pre-Shared Key (PSK)** allows a network professional to configure a password or passphrase on the wireless router. This password is then shared with all authorized users.
+
+  * When using PSK, all authorized users know and share the same key.
+  * A problem with this method is that if the key is shared with someone who is no longer authorized, that user will still be able to access the network (provided the network professional has not changed the key).
+
+### Enterprise (IEEE 802.1X / AAA)
+
+Enterprise is another authentication method that allows network professionals to implement **IEEE 802.1X** for Network Access Control (NAC). This is done using an **Authentication, Authorization, and Accounting (AAA)** server.
+
+  * **Authentication:** The AAA server allows network professionals to create a unique user account for each authorized user on the centralized server.
+  * **Authorization:** The professional can configure authorization security policies on each user account that define the user’s privilege level.
+  * **Accounting:** The AAA server can create log messages for each activity performed by an authenticated user, providing accountability.
+
+The following diagram shows an enterprise network topology including an AAA server.
+
+<div align="center">
+  <img src="./images/17.png" width="600"/>
+
+Figure 10.17 – AAA on an enterprise network
+</div>
+
+
+As shown in the preceding diagram:
+
+  * The **Supplicant** is the wireless client (e.g., laptop) that wants to join the network.
+  * The **Authenticator** is the wireless router or Access Point.
+  * The **Authentication Server** is the centralized AAA server.
+
+In this wireless infrastructure, each authorized user is assigned unique user credentials, allowing for better user management.
+
+> #### 📝 Important Note
+>
+> The authentication server can use either the **Remote Authentication Dial-In User Service (RADIUS)** or **Terminal Access Controller Access Control System+ (TACACS+)** protocol.
+>
+>   * **RADIUS** is an open authentication protocol that is interoperable with different vendor devices.
+>   * **TACACS+** is a Cisco proprietary protocol that works with Cisco devices only.
+
+### Open Authentication
+
+**Open authentication** is the default method on many wireless routers and access points.
+
+  * This method provides **no authentication** and allows *any* wireless device to connect and access resources on the wireless network.
+  * Additionally, this method provides **no data encryption** between the client and the router.
+  * Many public wireless networks use open authentication to allow anyone in public to access the internet. This authentication method is **not recommended** for organizations.
+
+### Wi-Fi Protected Setup (WPS)
+
+**Wi-Fi Protected Setup (WPS)** is an unsecure authentication method that was designed to eliminate the need to manually configure a password.
+
+  * WPS simply provides an easy method to connect by pressing the physical WPS button on the wireless router and enabling the WPS feature on the client.
+  * Both devices will exchange a mutual 8-digit key, allowing the client to be authenticated.
+  * While this seems convenient, it is **highly unsecure**. The 8-digit PIN generated by the wireless router can be easily retrieved by hackers. It is recommended to **disable WPS** whenever possible.
+
+### Captive Portal
+
+A **captive portal** is simply a web-based portal (a web page) that prompts a user on a wireless client to provide their user credentials when they connect to a wireless network. Captive portals are commonly implemented by network professionals within hotels and coffee shops.
+
+---
