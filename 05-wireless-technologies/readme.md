@@ -321,3 +321,107 @@ Figure 10.11 – IBSS wireless network
 As shown in the preceding diagram, each wireless client, such as a laptop, can be configured to operate as an access point. This allows other wireless clients to connect and share resources with each other without the need for a dedicated wireless router.
 
 ---
+
+# 📡 **Antenna Types**
+
+When implementing a wireless infrastructure within an organization, the **placement** of wireless routers and access points is very important. This is to ensure there is proper coverage of the wireless signal for all wireless clients (like laptops and phones) within a building or office space.
+
+If a wireless client is unable to receive an acceptable quality of signal from a wireless router, the transmission speeds for exchanging data will be affected.
+
+Hence, it is important for network professionals to perform a **WLAN survey**. This survey helps to determine the number of access points needed and the specific placement of each access point to ensure there is full coverage for the organization.
+
+There are various types of antennas that are installed on wireless routers and access points. Each type of antenna determines how the signal is focused in a direction.
+
+### 🌎 Omnidirectional Antennas
+
+Omnidirectional antennas **do not focus** the signal in a specific direction. Instead, they emit the signal **all around** the antenna in any direction (like a 360-degree bubble).
+
+**Dipole antennas** are a common example of omnidirectional antennas. These are commonly found within wireless radio devices and mobile cellular towers to send and receive signals in all directions.
+
+The following is a picture of an omnidirectional antenna with an external network adapter:
+
+<div align="center">
+  <img src="./images/12.png" width="600"/>
+
+
+Figure 10.12 – Omnidirectional antenna
+</div>
+
+
+### 🎯 Directional Antennas
+
+While omnidirectional antennas work great for providing general signal coverage within a home or office, they are not efficient at focusing a wireless signal in a specific direction.
+
+**Directional antennas** are better at radiating their signal more efficiently in a **single direction** (like a focused beam).
+
+The following are examples of common directional antennas:
+
+  * Yagi antenna
+  * Dish antenna
+  * Parabolic antenna
+
+Some of the wireless signal may radiate to the sides of the focal point, but a directional antenna still focuses *most* of the signal in a specific direction.
+
+## 🚀 MIMO Concepts
+
+### Single In Single Out (SISO)
+
+Older wireless routers, access points, and wireless network adapters were designed with a **single antenna**. This one antenna was used to both send and receive WLAN frames. This concept was referred to as **Single In Single Out (SISO)**.
+
+The following diagram shows an example of SISO communication between an access point and a client:
+
+<div align="center">
+  <img src="./images/13.png" width="600"/>
+
+  Figure 10.13 – Observing SISO
+</div>
+
+As shown in the preceding diagram, both the wireless client and the wireless router are using the same antenna on their devices to send and receive messages. While this allowed devices to communicate, it was not efficient for sending more traffic on the wireless network.
+
+### Multiple In Multiple Out (MIMO)
+
+Wireless device manufacturers began implementing **multiple antennas** on wireless routers, access points, and clients. This allows multiple antennas to send and receive messages **simultaneously**, with the intention of increasing the throughput (speed) of the wireless network. This concept is referred to as **Multiple In Multiple Out (MIMO)**.
+
+The following diagram shows an access point and client using MIMO to exchange messages:
+
+<div align="center">
+  <img src="./images/14.png" width="600"/>
+
+  Figure 10.14 – Observing MIMO
+</div>
+
+
+### Single-User MIMO (SU-MIMO)
+
+On a wireless network with multiple wireless clients connected to the same wireless router, the router can only transmit a stream of messages to **one wireless client at a time**. It then talks to the next client, and so on.
+
+Therefore, all wireless clients associated with the same wireless router or access point **do not** receive messages at the same time. This is referred to as **Single-User Multiple In Multiple Out (SU-MIMO)**.
+
+The following diagram shows a representation of SU-MIMO on a wireless network:
+
+<div align="center">
+  <img src="./images/15.png" width="600"/>
+
+  Figure 10.15 – Observing SU-MIMO
+</div>
+
+
+As shown in the preceding diagram, the access point has multiple streams, but it is unable to send the streams to each client at the same time. The access point will forward the stream for each client **one at a time**, ensuring messages are delivered to their destinations as quickly as possible.
+
+### Multi-User MIMO (MU-MIMO)
+
+Wireless networks that use SU-MIMO have the limitation of forwarding a data stream to only one wireless client at a time.
+
+The implementation of **Multi-User Multiple Input Multiple Out (MU-MIMO)** allows a wireless router or access point to forward **all data streams to all wireless clients at the same time**.
+
+The following diagram shows a representation of MU-MIMO on a wireless network:
+
+<div align="center">
+  <img src="./images/16.png" width="600"/>
+
+  Figure 10.16 – Observing MU-MIMO
+</div>
+
+As shown in the preceding diagram, the access point is distributing multiple data streams to each wireless client at the same time.
+
+---
