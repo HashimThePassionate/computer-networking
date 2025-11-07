@@ -1,5 +1,61 @@
 # 📡 **Exploring Wireless Networking**
 
+<details>
+<summary><strong>📑 Table of Contents</strong></summary>
+
+- [📡 **Exploring Wireless Networking**](#-exploring-wireless-networking)
+    - [🏠 Wireless Routers](#-wireless-routers)
+    - [⚙️ Router Functions](#️-router-functions)
+    - [🏢 Access Points (APs)](#-access-points-aps)
+- [📡 **Beacons, Probes, Stations, and SSIDs**](#-beacons-probes-stations-and-ssids)
+  - [🏷️ Service Set Identifier (SSID)](#️-service-set-identifier-ssid)
+    - [🔒 Security and Naming](#-security-and-naming)
+  - [📢 Beacons](#-beacons)
+    - ["Hiding" Your Wireless Network](#hiding-your-wireless-network)
+  - [💻 Stations and Probes](#-stations-and-probes)
+    - [⚠️ Security Risks of Probes](#️-security-risks-of-probes)
+- [📡 **Frequencies, Ranges, and Channels**](#-frequencies-ranges-and-channels)
+    - [📜 IEEE 802.11 Wireless Standards](#-ieee-80211-wireless-standards)
+    - [📶 The 2.4 GHz Band](#-the-24-ghz-band)
+    - [🚀 The 5 GHz Band](#-the-5-ghz-band)
+    - [⚖️ Wireless Band Comparison](#️-wireless-band-comparison)
+- [📡 **SSID and Wireless Topologies**](#-ssid-and-wireless-topologies)
+    - [🏠 Basic Service Set (BSS)](#-basic-service-set-bss)
+    - [🏢 Extended Service Set (ESS)](#-extended-service-set-ess)
+    - [💻 Independent Basic Service Set (IBSS)](#-independent-basic-service-set-ibss)
+- [📡 **Antenna Types**](#-antenna-types)
+    - [🌎 Omnidirectional Antennas](#-omnidirectional-antennas)
+    - [🎯 Directional Antennas](#-directional-antennas)
+  - [🚀 MIMO Concepts](#-mimo-concepts)
+    - [Single In Single Out (SISO)](#single-in-single-out-siso)
+    - [Multiple In Multiple Out (MIMO)](#multiple-in-multiple-out-mimo)
+    - [Single-User MIMO (SU-MIMO)](#single-user-mimo-su-mimo)
+    - [Multi-User MIMO (MU-MIMO)](#multi-user-mimo-mu-mimo)
+- [🔐 **Delving into Wireless Security**](#-delving-into-wireless-security)
+  - [🛡️ Wireless Encryption Standards](#️-wireless-encryption-standards)
+    - [Wired Equivalent Privacy (WEP)](#wired-equivalent-privacy-wep)
+    - [Wi-Fi Protected Access (WPA)](#wi-fi-protected-access-wpa)
+    - [Wi-Fi Protected Access 2 (WPA2)](#wi-fi-protected-access-2-wpa2)
+    - [Wi-Fi Protected Access 3 (WPA3)](#wi-fi-protected-access-3-wpa3)
+  - [🔑 Authentication Methods](#-authentication-methods)
+    - [Pre-Shared Key (PSK)](#pre-shared-key-psk)
+    - [Enterprise (IEEE 802.1X / AAA)](#enterprise-ieee-8021x--aaa)
+    - [Open Authentication](#open-authentication)
+    - [Wi-Fi Protected Setup (WPS)](#wi-fi-protected-setup-wps)
+    - [Captive Portal](#captive-portal)
+- [📱 **Exploring Cellular Technologies**](#-exploring-cellular-technologies)
+  - [2️⃣ 2nd Generation (2G)](#2️⃣-2nd-generation-2g)
+    - [Access Methods](#access-methods)
+  - [3️⃣ 3rd Generation (3G)](#3️⃣-3rd-generation-3g)
+    - [3G Data Rates](#3g-data-rates)
+  - [4️⃣ 4th Generation (4G)](#4️⃣-4th-generation-4g)
+    - [4G Data Rates](#4g-data-rates)
+  - [5️⃣ 5th Generation (5G)](#5️⃣-5th-generation-5g)
+
+</details>
+
+---
+
 When designing a wireless network for an organization, it is important to consider several key factors:
 
   * The components needed.
