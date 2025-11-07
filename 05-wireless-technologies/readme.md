@@ -545,3 +545,75 @@ In this wireless infrastructure, each authorized user is assigned unique user cr
 A **captive portal** is simply a web-based portal (a web page) that prompts a user on a wireless client to provide their user credentials when they connect to a wireless network. Captive portals are commonly implemented by network professionals within hotels and coffee shops.
 
 ---
+
+# 📱 **Exploring Cellular Technologies**
+
+Cellular technologies have been around for quite some time, and telecommunication providers are continuously improving the quality of service (QoS) provided to their customers.
+
+These technologies allow us to communicate with each other using a cellular phone by connecting to a mobile telecommunication provider’s network. While a provider allows registered devices to connect to their network, they also have the ability to:
+* Track the geo-location of a connected mobile device.
+* Monitor the traffic types on their cellular networks.
+
+## 2️⃣ 2nd Generation (2G)
+
+2nd Generation (2G) is one of the most common generation cellular technologies within many countries around the world, as it introduced both **voice and text communication** between mobile devices.
+
+* 2G uses the **Global System for Mobile Communications (GSM)** technology. This allows supported cellular devices to connect to the service provider’s network and exchange voice and text messages with other users.
+* Additionally, mobile telecommunication service providers used both **Enhanced Data rates for GSM Evolution (EDGE)** and **General Packet Radio Service (GPRS)** to provide data services on a 2G cellular network.
+
+### Access Methods
+
+On the 2G network, two common access methods were used:
+
+1.  **Time-Division Multiple Access (TDMA)**: This method divides the available bandwidth into different or separate time slots. It allows each device to be allocated a specific amount of bandwidth at a time to exchange messages over the service provider’s network.
+2.  **Code-Division Multiple Access (CDMA)**: This is another common access method that ensures both the sender and receiver are transmitting messages using a mutually unique code pattern. This technique ensures both devices are able to interpret the messages that are being exchanged.
+
+## 3️⃣ 3rd Generation (3G)
+
+The 3rd Generation (3G) is the successor of 2G that provides faster data services using both **High Speed Packet Access (HSPA)** and **HSPA+**.
+
+3G used two technologies that were created from CDMA as the access method:
+1.  **Universal Mobile Telecommunications Systems (UTMS)**: This introduced HSPA and HSPA+ to support better data services over the mobile network.
+2.  **CDMA2000**: This introduced the **Evolution Data Optimized (EVDO)** technologies for better data rates.
+
+### 3G Data Rates
+
+The following are important key points about 3G data rates:
+
+* **Uses UMTS with Wideband Code Division Multiple Access (WCMDA)**:
+    * Supports up to **2 Mbps**.
+    * **HSPA**: Supports download speeds of **14.4 Mbps** and upload speeds of **5.57 Mbps**.
+    * **HSPA+**: Provides **42 Mbps** download speeds and **11.5 Mbps** upload speeds.
+
+* **Uses CDMA2000**:
+    * Supports both upload and download speeds of **153 Kbps**.
+    * Uses **EVDO**, which has **14.7 Mbps** download speeds and **5.4 Mbps** upload speeds.
+
+## 4️⃣ 4th Generation (4G)
+
+The 4th Generation (4G) is the successor of 3G that provides very high data rates using two technologies:
+
+1.  **Worldwide Interoperability for Microwave Access (WiMAX)**: Defined by IEEE 802.16.
+2.  **Long-Term Evolution (LTE)**.
+
+These mobile technologies provide an upgrade migration path for systems and devices on both the UMTS and GSM networks.
+
+### 4G Data Rates
+
+The following are important key points about 4G data rates:
+
+* **WiMax**: Operates at **70 Mbps**.
+* **WiMax 2.1**: Operates at **1 Gbps**.
+* **LTE**: Supports **300 Mbps**.
+* **LTE-A (Advanced)**: Supports **1 Gbps**.
+* **LTE-Pro**: Supports **3 Gbps**.
+
+## 5️⃣ 5th Generation (5G)
+
+Currently, the 5th Generation (5G) is the latest cellular technology within the mobile telecommunication industry.
+
+* 5G still uses some of the existing 4G technologies within the mobile service provider’s network.
+* It provides significant gigabit speeds with very low latency between devices.
+* 5G technologies use **MIMO (Multiple In Multiple Out)** with **beamforming**. This is used to boost or concentrate the signal in a specific direction to ensure a mobile device has coverage to access the cellular network.
+
+---
