@@ -113,7 +113,6 @@ The SNMP Manager allows the network professional to:
   * Retrieve device statuses.
   * Push configuration changes to network devices.
 
------
 
 ## 📜 SNMP Versions
 
@@ -123,7 +122,6 @@ There are different versions of SNMP, as follows:
   * **SNMPv2**: This version of SNMP is an improvement on how SNMP handles communication between the SNMP Manager and SNMP Agent, but this version does not support data encryption or authentication. Hence, it’s not recommended for use.
   * **SNMPv3**: This version of SNMP is an improvement on prior versions and supports **data encryption, integrity checking, and authentication**.
 
------
 
 ## 🧩 Components of a Network Management System (NMS)
 
@@ -148,7 +146,11 @@ The **SNMP Agent** is configured on a networking device, such as a switch or rou
 
 The following diagram shows a simple representation of these SNMP messages on a network:
 
-\<p align="center"\>Figure 11.4 – SNMP messages\</p\>
+<div align="center">
+  <img src="./images/04.png" width="600"/>
+
+  Figure 11.4 – SNMP messages
+</div>
 
 ### 3\. Management Information Base (MIB)
 
@@ -160,5 +162,138 @@ Simply put, the process works like this:
 2.  The **SNMP agent** on the device receives the request.
 3.  The agent uses the **MIB** to locate the requested information within the networking device.
 4.  The agent responds to the **Manager** with the collected data.
+
+---
+
+# 📜 Network Device Logs
+
+Networking devices, security appliances, servers, and end devices commonly generate **logs**. These are records of every event that has occurred on the device.
+
+Network professionals depend on the logs created by a device to determine the reason for an event. For instance, imagine if an organization experienced a network outage for a few minutes during the night. The networking devices will generate log messages for each event that occurred, including the timestamps and a description of the event.
+
+Network professionals can observe the logs before, during, and after the event from various devices within the affected area of the network. This helps them determine the reason for the outage and the probable causes.
+
+Logs are a great way to ensure proper accountability of events and actions on a network. Without network device logs, it is quite challenging to determine the reasons for events that occurred on a network.
+
+The following screenshot shows various logs from networking devices within an organization:
+
+<div align="center">
+  <img src="./images/05.png" width="600"/>
+
+Figure 11.5 – Device logs
+</div>
+
+As shown in the preceding screenshot, various log messages contain timestamps, severity levels, and descriptions of the events displayed. As an aspiring network professional, it is important to monitor network changes and device logs closely to determine whether there are any issues or potential problems within your organization.
+
+
+## 📈 Traffic Logs
+
+**Traffic logs** contain information and details about the traffic that flows between devices on a network. They allow network professionals to see a summary of all the traffic for a given time, contain specific details, and are commonly used for post-event analysis.
+
+For instance, network professionals can use network monitoring tools to view the past traffic pattern of a network, allowing you to compare past and present events.
+
+The following screenshot shows a traffic log graph of a network switch over 24 hours:
+
+<div align="center">
+  <img src="./images/06.png" width="600"/>
+
+  Figure 11.6 – Traffic log graph
+</div>
+
+As shown in the preceding screenshot, the graph shows the traffic patterns of a network switch over 24 hours. This allows a network professional to determine which time of day the network segment is mostly utilized and the average bandwidth that is being used on a daily, monthly, or annual basis.
+
+
+## 🛡️ Audit Logs
+
+**Audit logs** are common for determining specific information about **who, what, and when** an event occurred. For instance, audit logs help network professionals determine who accessed resources and what resources were accessed, the source and destination addresses, the timestamp of the event, and user information.
+
+The following screenshot shows the security audit logs for a Windows 11 operating system:
+
+<div align="center">
+  <img src="./images/07.png" width="600"/>
+
+  Figure 11.7 – Audit logs
+</div>
+
+
+As shown in the preceding screenshot, the audit logs are created on the device for every successful and unsuccessful logon attempt and special access event.
+
+
+## 📨 Syslog Protocol
+
+Networking devices, servers, and even end devices generate log messages that contain information and critical details about events that occur. Network professionals use the information found within log messages to identify whether a problem has occurred and what caused the problem.
+
+Since each networking device generates a log message, this means a network professional would need to manually log into a device to view the logs for that device only. This process can be very time-consuming and inefficient.
+
+Many networking devices, servers, and end devices support a common network protocol that allows them to forward their log messages over a network to a **centralized logging server**. This protocol is known as **Syslog**.
+
+The syslog protocol allows devices to generate logs for events that occur on a device. For instance, if an interface on a router has been disabled or enabled, a syslog message is created that contains all the necessary information about the event.
+
+### Syslog Message Format
+
+The following is the default format of a syslog message that is generated by Cisco devices:
+
+`seq no: timestamp: %facility-severity-MNEMONIC: description`
+
+The following is a breakdown of each component of a Syslog message:
+
+  * **seq no**: Represents the sequence number that is assigned to the log message.
+  * **timestamp**: Includes the date and time the message was generated by the device. The date and timestamp are taken from the system clock on the host device.
+  * **facility**: Represents what the log message is referencing regarding the event that has occurred, such as the source of the problem or protocol.
+  * **severity**: Includes a severity code that helps network professionals determine the importance of the event.
+  * **MNEMONIC**: Inserts text that is uniquely used to describe the event.
+  * **description**: Contains a brief description of the event.
+
+### Syslog Message Example
+
+The following is an example of a Syslog message generated by a Cisco device:
+
+`*Apr 28, 15:53:58.5353: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up`
+
+Here is a breakdown of this example:
+
+  * **`Apr 28, 15:53:58.5353`**: This is the `timestamp`.
+  * **`%LINEPROTO`**: This is the `facility`, indicating the event is related to a line protocol.
+  * **`-5-`**: This is the `severity` level (Notification).
+  * **`UPDOWN`**: This is the `MNEMONIC`, describing the *type* of event.
+  * **`Line protocol on Interface GigabitEthernet0/1, changed state to up`**: This is the `description`, providing clear details of the event.
+
+### Syslog Severity Levels
+
+The following table contains the Syslog severity levels, their names, and descriptions:
+
+| Severity Name | Severity Level | Description |
+| :--- | :---: | :--- |
+| Emergency | 0 | System is unusable |
+| Alert | 1 | Immediate action is needed |
+| Critical | 2 | Critical condition |
+| Error | 3 | Error condition |
+| Warning | 4 | Warning condition |
+| Notification | 5 | Normal but significant condition |
+| Informational | 6 | Informational message |
+| Debugging | 7 | Debugging message |
+
+<div align="center">
+  <img src="./images/07.png" width="600"/>
+
+  Figure 11.8 – Syslog severity levels
+</div>
+
+
+### Syslog Operation
+
+The Syslog protocol uses **UDP service port number 514** by default over a network. Keep in mind that Syslog is used to gather logging information that helps network professionals with monitoring and troubleshooting issues within an organization. Syslog allows network professionals to configure devices so that they can send their log messages to a specific logging destination, such as a **centralized logging server**.
+
+The following screenshot shows a collection of Syslog messages on a centralized logging server:
+
+<div align="center">
+  <img src="./images/08.png" width="600"/>
+
+  Figure 11.9 – Log messages
+</div>
+
+As shown in the preceding screenshot, the centralized logging server collects all the log messages from various devices on the network. It can also perform both **de-duplication** (grouping identical messages) and **correlation** (linking related events). This helps network professionals easily determine the sequence of events that occurred on the network.
+
+Having completed this section, you have learned about the importance of monitoring a network and using various metrics to measure network performance. In the next section, you will understand how to identify interface issues on devices.
 
 ---
