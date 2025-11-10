@@ -102,3 +102,63 @@ The following screenshot was taken from a network monitoring tool that’s repor
 As shown in the preceding screenshot, network monitoring tools provide easy-to-understand visualizations for network professionals to quickly determine whether the device is overwhelmed or not.
 
 ---
+
+# 📡 Simple Network Management Protocol (SNMP)
+
+**Simple Network Management Protocol (SNMP)** is a common network protocol that allows network professionals to easily monitor devices within their organization. Network professionals usually configure their networking devices so that they can communicate with an **SNMP Manager** application. This application is either installed on their computer or on a centralized server on the network.
+
+The SNMP Manager allows the network professional to:
+
+  * Easily collect statistical data from devices on the network.
+  * Retrieve device statuses.
+  * Push configuration changes to network devices.
+
+-----
+
+## 📜 SNMP Versions
+
+There are different versions of SNMP, as follows:
+
+  * **SNMPv1**: Does not support any security such as data encryption or authentication, hence it’s not recommended for use.
+  * **SNMPv2**: This version of SNMP is an improvement on how SNMP handles communication between the SNMP Manager and SNMP Agent, but this version does not support data encryption or authentication. Hence, it’s not recommended for use.
+  * **SNMPv3**: This version of SNMP is an improvement on prior versions and supports **data encryption, integrity checking, and authentication**.
+
+-----
+
+## 🧩 Components of a Network Management System (NMS)
+
+When working with SNMP, three main components need to work together to create a Network Management System (NMS):
+
+1.  **SNMP Manager**
+2.  **SNMP Agent**
+3.  **Management Information Base (MIB)**
+
+### 1\. SNMP Manager
+
+The **Manager** is an application that’s installed on the network professional’s computer or centrally on a server. The Manager is responsible for collecting information and making configurations on devices that are running an agent.
+
+  * **SNMP GET Message**: The manager can retrieve information from agents on the network by sending an **SNMP GET** message. This instructs the agent to respond with the requested information.
+  * **SNMP SET Message**: The manager sends an **SNMP SET** message to an agent when configuration changes are needed.
+
+### 2\. SNMP Agent
+
+The **SNMP Agent** is configured on a networking device, such as a switch or router. The SNMP agent is the actual component on the networking device that communicates with the SNMP manager application and vice versa.
+
+  * **SNMP TRAP Message**: **Trap** data units are sent *from* the Agent *to* the Manager. They contain data about changes or events that occurred on the device (for example, an interface going down) and only send this information when a threshold has been met. Using traps greatly decreases network management bandwidth.
+
+The following diagram shows a simple representation of these SNMP messages on a network:
+
+\<p align="center"\>Figure 11.4 – SNMP messages\</p\>
+
+### 3\. Management Information Base (MIB)
+
+The **MIB** is a database that contains the information needed by the agent to find and retrieve data from a device.
+
+Simply put, the process works like this:
+
+1.  A network professional uses the **Manager** to retrieve information.
+2.  The **SNMP agent** on the device receives the request.
+3.  The agent uses the **MIB** to locate the requested information within the networking device.
+4.  The agent responds to the **Manager** with the collected data.
+
+---
