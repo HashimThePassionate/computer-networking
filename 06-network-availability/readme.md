@@ -287,7 +287,7 @@ The Syslog protocol uses **UDP service port number 514** by default over a netwo
 The following screenshot shows a collection of Syslog messages on a centralized logging server:
 
 <div align="center">
-  <img src="./images/08.png" width="600"/>
+  <img src="./images/09.png" width="600"/>
 
   Figure 11.9 – Log messages
 </div>
@@ -295,5 +295,238 @@ The following screenshot shows a collection of Syslog messages on a centralized 
 As shown in the preceding screenshot, the centralized logging server collects all the log messages from various devices on the network. It can also perform both **de-duplication** (grouping identical messages) and **correlation** (linking related events). This helps network professionals easily determine the sequence of events that occurred on the network.
 
 Having completed this section, you have learned about the importance of monitoring a network and using various metrics to measure network performance. In the next section, you will understand how to identify interface issues on devices.
+
+---
+
+# 🖥️ Understanding Interface Issues
+
+Network professionals can log into a networking device, such as a switch or router, and check the status of each physical and logical interface on the device. By checking the interface’s status, network professionals can quickly determine whether an interface has been misconfigured or is experiencing a physical issue. This may result in connectivity issues between the sender and receiver devices on the network.
+
+In the following subsections, you will explore various status types that are used to identify a network-related issue on a device.
+
+
+## 📊 Checking the Link State (Up/Down)
+
+If the link state is **up**, it is an indication that the interface of a device is active and can both send and receive messages.
+
+### On Cisco IOS
+
+The `show interfaces` command on Cisco IOS switches and routers allows network professionals to determine the status of an interface, as shown here:
+
+<div align="center">
+  <img src="./images/10.png" width="600"/>
+
+  Figure 11.10 – Verifying the link’s status
+</div>
+
+
+
+As shown in the preceding screenshot, **FastEthernet0/1** has an **up/up** status. This indicates the interface can send and receive messages, and a network cable is physically connected.
+
+Additionally, the `show ip interface brief` command allows network professionals to obtain a summary of all interfaces on Cisco IOS switches and routers.
+
+The following screenshot shows the output of the `show ip interface brief` command on a Cisco router:
+
+<div align="center">
+  <img src="./images/11.png" width="600"/>
+
+  Figure 11.11 – Checking all the interfaces on a Cisco router
+</div>
+
+
+
+As shown in the preceding screenshot, a network professional can determine whether an interface is assigned an IP address and check the physical (`Status`) and logical (`Protocol`) status of the interface on the Cisco router.
+
+### On Windows OS
+
+Furthermore, on a Windows operating system, the `netsh interface ipv4 show interface` and `netsh interface ipv6 show interface` commands allow you to see the status of all the interfaces on the device.
+
+The following screenshot shows the IPv4 interface statuses on a Windows 11 computer:
+
+<div align="center">
+  <img src="./images/12.png" width="600"/>
+
+  Figure 11.12 – Checking IPv4 interface statuses
+</div>
+
+
+
+The following screenshot shows the IPv6 interface statuses on a Windows 11 computer:
+
+<div align="center">
+  <img src="./images/13.png" width="600"/>
+
+  Figure 11.13 – Checking IPv6 interface statuses
+</div>
+
+
+
+### On Linux OS
+
+On the Linux operating system, the `ip link show` command allows you to see the statuses of all interfaces on the device, as shown here:
+
+<div align="center">
+  <img src="./images/14.png" width="700"/>
+
+  Figure 11.14 – Checking interface statuses on Linux
+</div>
+
+
+
+The following screenshot shows the output of the `ip addr` command:
+
+<div align="center">
+  <img src="./images/15.png" width="700"/>
+
+  Figure 11.15 – Checking IP addresses
+</div>
+
+
+
+As shown in the preceding screenshot, a network professional can determine the status of all the interfaces on systems running Linux-based operating systems.
+
+
+## 🏎️ Checking the Speed
+
+The speed of an interface indicates how quickly a device can send and receive messages on that same interface. There are various types of interfaces on a networking device:
+
+  * **Ethernet**: Operates up to 10 Mbps
+  * **FastEthernet**: Operates up to 100 Mbps
+  * **GigabitEthernet**: Operates up to 1,000 Mbps
+
+It is important to ensure the speed configurations match on devices that are connected.
+
+### On Cisco IOS
+
+The following screenshot shows the current operating speed on the interface of a Cisco switch:
+
+<div align="center">
+  <img src="./images/16.png" width="600"/>
+
+  Figure 11.16 – Verifying the speed of an interface
+</div>
+
+
+
+### On Windows OS
+
+However, on a Windows operating system, to verify the speed of the local interfaces, you must open **Device Manager**, right-click on the interface, and select the **Properties | Advanced** tab, as shown here:
+
+<div align="center">
+  <img src="./images/17.png" width="400"/>
+
+  Figure 11.17 – Verifying the speed on Windows
+</div>
+
+
+
+As shown in the preceding screenshot, a network professional can manually configure the speed and duplex settings on the interface of the device.
+
+
+## 🔄 Checking the Duplex
+
+**Duplex** is referred to as the common method where two devices are able to exchange messages. The duplex of an interface is usually set as **Auto** by default, but a network professional can manually configure the interface to operate in **full** or **half** duplex.
+
+### On Windows OS
+
+To configure the duplex mode on a Windows operating system, open **Device Manager**, right-click on the interface, and select the **Properties | Advanced** tab, as shown here:
+
+<div align="center">
+  <img src="./images/17.png" width="400"/>
+
+  Figure 11.18 – Checking the duplex settings
+</div>
+
+
+
+### On Cisco IOS
+
+On Cisco devices, the `show interface status` and `show interfaces` commands verify the current state of the duplex on the interface, as shown here:
+
+<div align="center">
+  <img src="./images/18.png" width="600"/>
+
+  Figure 11.19 – Verifying the duplex status on a Cisco switch
+</div>
+
+
+
+As shown in the preceding screenshot, network professionals can easily verify the current duplex status of an interface on Cisco switches on a network.
+
+
+## ⏳ Checking the Uptime/Downtime
+
+Checking the device's **uptime** can help networking professionals determine whether the device loses power at a certain time. If a device loses power unexpectedly, this should raise concerns for the network professionals.
+
+### On Cisco IOS
+
+On Cisco devices, the `show version` command provides the device’s uptime, as shown here:
+
+<div align="center">
+  <img src="./images/19.png" width="700"/>
+
+  Figure 11.20 – Checking the uptime
+</div>
+
+
+
+As shown in the preceding screenshot, the uptime reveals that the network switch has been running/powered on for the past 39 minutes. If a power outage occurs or the device loses power, the uptime will be reset. Therefore, network professionals can use the uptime on a networking device to determine whether a network outage was due to power loss within their organization.
+
+## 📉 Interface Errors or Alerts
+
+What if network professionals configure the networking devices with the proper configurations but still experience **packet loss** and **high latency**? What could be the cause of this?
+
+Faulty network cables and interfaces are the most common causes of physical issues on a network. However, before changing the network cable or reassigning an interface, it’s important to understand the types of errors and alerts that are created by a networking device.
+
+The following screenshot shows the interface statistics of a Cisco switch:
+
+<div align="center">
+  <img src="./images/20.png" width="600"/>
+
+  Figure 11.21 – Interface statistics
+</div>
+
+As shown in the preceding screenshot, there is a lot of statistical information within the lower section of the output. This includes the number of packets that have entered the interface and the number of broadcast messages, along with a lot of details that are important to network professionals.
+
+The following list describes each interface error type:
+
+  * **Input errors**: The input errors field indicates the total number of errors that were identified on the interface. These errors include the sum of the frame, giants, no buffer, runts, Cyclic Redundancy Check (CRC), overrun, and any ignored counts.
+  * **Runts**: Runts are simply any packets that are discarded by the device because they are **less than 64 bytes** in size. These are sometimes caused due to a network collision between two devices.
+  * **Giants**: Giants are any packets that are discarded because they are **greater than 1,518 bytes** in size. Giants are usually caused by communication issues on the network.
+  * **CRC (Cyclic Redundancy Check)**: CRC errors are created when the checksum value within the trailer of a frame does not match the checksum generated by the receiver. If a mismatch in the checksum occurs, the integrity of the message is compromised. Additionally, CRC errors are often caused by a faulty network cable or interface.
+  * **Output errors**: Output errors are simply the total amount of all errors that prevent the transmission of any datagram from leaving the interface of the device.
+  * **Collisions**: Collisions are the total number of messages that were retransmitted because an Ethernet collision had occurred.
+  * **Late collisions**: Late collisions are any collisions that were detected after the first 512 bytes of the frame were transmitted.
+
+
+### Encapsulation Errors
+
+Additionally, there are **encapsulation errors**. These are caused by inconsistent configurations between switches, such as a mismatch in the trunking encapsulation protocol (e.g., **IEEE 802.1Q** on one switch and **Inter-Switch Link (ISL)** on the other).
+
+ISL is a legacy Cisco proprietary trunking encapsulation protocol that allows Cisco switches to create a logical trunk link between themselves. However, ISL is not commonly implemented in Cisco environments, and IEEE 802.1Q is currently being used as the preferred encapsulation protocol for trunk links between switches.
+
+Hence, it’s important to ensure that if two switches are interconnected, the encapsulation protocol is the same between both devices.
+
+Having completed this section, you have learned about various types of interface errors, their possible causes, and how to resolve them. In the next section, you will discover how environmental factors can affect the performance of network devices.
+
+
+# 🌡️ Environmental Factors and Sensors
+
+Environmental factors can affect the performance of network devices and servers within an organization. Network professionals commonly configure and implement both software- and hardware-based sensors to detect **temperature**, **humidity**, and **electrical power** changes on devices.
+
+  * **Temperature**: If the temperature of a device is **too hot**, the operating system will automatically shut down to prevent physical damage to the hardware components. Hence, networking devices and security appliances need proper cooling to ensure they continue to operate as expected.
+  * **Humidity**: The humidity of the server room or network closet needs to be closely monitored.
+      * If the humidity is **too low**, static discharges can occur, which can damage hardware components.
+      * However, if the humidity is **too high**, there will be a lot of water vapor in the air. This creates condensation, which is bad for electrical and electronic components.
+
+Overall, a **heating, ventilation, and air conditioning (HVAC)** system is usually implemented to maintain and control the airflow and temperature within data centers, server rooms, and network closets to ensure devices are properly cooled.
+
+The following are additional sensors that are commonly implemented:
+
+  * **Electrical sensors**: Monitors a device’s circuit load (power).
+  * **Flood monitor**: Monitors whether there’s water in the room.
+  * **NetFlow data**: This is a standard for collecting network statistics to determine the performance of the network. NetFlow uses a probe and a collector, where the probe watches network communication and the summary is sent to the collector.
+
+Having completed this section, you have learned about the importance of monitoring environmental factors within a network to ensure its optimal performance within an organization.
 
 ---
