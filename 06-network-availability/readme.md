@@ -1,5 +1,50 @@
 # 📊 Network Performance Metrics
 
+<details>
+<summary><strong>📑 Table of Contents</strong></summary>
+
+- [📊 Network Performance Metrics](#-network-performance-metrics)
+    - [🌡️ Temperature](#️-temperature)
+    - [💻 Central Processing Unit (CPU) Utilization](#-central-processing-unit-cpu-utilization)
+    - [🧠 Memory Utilization](#-memory-utilization)
+    - [📈 Bandwidth](#-bandwidth)
+    - [⏱️ Latency](#️-latency)
+    - [📉 Jitter](#-jitter)
+- [📡 Simple Network Management Protocol (SNMP)](#-simple-network-management-protocol-snmp)
+  - [📜 SNMP Versions](#-snmp-versions)
+  - [🧩 Components of a Network Management System (NMS)](#-components-of-a-network-management-system-nms)
+    - [1. SNMP Manager](#1-snmp-manager)
+    - [2. SNMP Agent](#2-snmp-agent)
+    - [3. Management Information Base (MIB)](#3-management-information-base-mib)
+- [📜 Network Device Logs](#-network-device-logs)
+  - [📈 Traffic Logs](#-traffic-logs)
+  - [🛡️ Audit Logs](#️-audit-logs)
+  - [📨 Syslog Protocol](#-syslog-protocol)
+    - [Syslog Message Format](#syslog-message-format)
+    - [Syslog Message Example](#syslog-message-example)
+    - [Syslog Severity Levels](#syslog-severity-levels)
+    - [Syslog Operation](#syslog-operation)
+- [🖥️ Understanding Interface Issues](#️-understanding-interface-issues)
+  - [📊 Checking the Link State (Up/Down)](#-checking-the-link-state-updown)
+    - [On Cisco IOS](#on-cisco-ios)
+    - [On Windows OS](#on-windows-os)
+    - [On Linux OS](#on-linux-os)
+  - [🏎️ Checking the Speed](#️-checking-the-speed)
+    - [On Cisco IOS](#on-cisco-ios-1)
+    - [On Windows OS](#on-windows-os-1)
+  - [🔄 Checking the Duplex](#-checking-the-duplex)
+    - [On Windows OS](#on-windows-os-2)
+    - [On Cisco IOS](#on-cisco-ios-2)
+  - [⏳ Checking the Uptime/Downtime](#-checking-the-uptimedowntime)
+    - [On Cisco IOS](#on-cisco-ios-3)
+  - [📉 Interface Errors or Alerts](#-interface-errors-or-alerts)
+    - [Encapsulation Errors](#encapsulation-errors)
+- [🌡️ Environmental Factors and Sensors](#️-environmental-factors-and-sensors)
+
+</details>
+
+---
+
 Performance metrics help network professionals within the industry to determine whether their network is operating as expected or if the delivery of network resources is affected. Network professionals use various tools and processes to collect data about the network.
 
 This data is then used for analysis and to generate reports that indicate the actual performance of the network. These statistics are recorded and commonly used to compare the current performance with past results. This comparison helps a network professional determine whether the current performance of the network is within the expected operating state or abnormal.
